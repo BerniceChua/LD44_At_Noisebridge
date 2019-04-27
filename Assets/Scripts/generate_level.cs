@@ -7,19 +7,23 @@ public class generate_level : MonoBehaviour
     
     public level_specification LevelSpecification;
     
-    public void GenerateLevel (Transform StaticParent, 
-                               Transform DynamicParent)
+    public void GenerateLevel (Transform StaticParent)
     {
-        
-        GameObject BlockBorder = GameObject.Instantiate(LevelSpecification.Prefab_BlockBorder);
-        BlockBorder.transform.SetParent(DynamicParent);
-        BlockBorder.transform.position = Vector3.zero;
-        
-        for (int i = 0; i < LevelSpecification.Prefab_SpawnerContainers.Length; i++)
+        float centerX = LevelSpecification.sizeX / 2f;
+        float centerZ = LevelSpecification.sizeZ / 2f;
+
+        for (int i = 0; i < LevelSpecification.sizeX; i++)
         {
-            GameObject Prefab_Container = LevelSpecification.Prefab_SpawnerContainers[i];
-            InstantiateSpawnerContainer(Prefab_Container, StaticParent, 
-                                        DynamicParent);
+            for (int j = 0; j < LevelSpecification.sizeZ; j++)
+            {
+
+                //int to enum type conversion?
+                //SpaceType typeOfSpace = LevelSpecification.data[i, j];
+                RowData rowData = LevelSpecification.data.rows[i];
+                GameObject spaceprefab = LevelSpecification.Prefab_Spaces[rowData.row[j]];
+                GameObject space = (GameObject)Instantiate(spaceprefab, StaticParent);
+                space.transform.localPosition = new Vector3((1f * i) - centerX, space.transform.localPosition.y, (1f * j)-centerZ);
+            }      
         }
     }
     

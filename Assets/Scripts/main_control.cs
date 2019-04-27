@@ -11,14 +11,13 @@ public class main_control : MonoBehaviour {
     // This has the benefit of making it so we can visually trace a path of execution without
     // relying on Unity as a black box.
     
-    public Transform DynamicParent;
     public Transform StaticParent;
     
     void Awake ()
     {
         // Create the Level, spawn characters
         generate_level LevelGenerator = FindObjectOfType<generate_level>();
-        LevelGenerator.GenerateLevel(StaticParent, DynamicParent);
+        LevelGenerator.GenerateLevel(StaticParent);
         
     }
     
