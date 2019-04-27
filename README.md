@@ -4,10 +4,10 @@ Our game for Ludum Dare 44 (LD44) at Noisebridge (April 26 - 28, 2019)
 ### Contributor List (in alphabetical order) - Who Made This?
 Bernice Anne W. Chua (programmer, UX/UI)
 - https://www.bernicechua.com/
-- http://bernicechua.github.io/
 - https://gitlab.com/BerniceChua
 - https://linkedin.com/in/bernicechua415/
 - https://twitter.com/ChuaBernice
+- https://www.aaronswartzday.org/bernice-chua/
 - https://www.noisebridge.net/wiki/User:Berni
 
 James Hofmann (programmer, sound designer)
