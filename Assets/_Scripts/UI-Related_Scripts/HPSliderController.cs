@@ -29,15 +29,13 @@ public class HPSliderController : MonoBehaviour {
     public float m_CurrentHP { get { return m_currentPlayerHP; } set { m_currentPlayerHP = value; } }
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         m_HPSlider.minValue = 0.0f;
-        m_HPSlider.maxValue = m_CurrentMaxHP;
+        m_HPSlider.maxValue = m_currentMaximumHP;
     }
 
     // Update is called once per frame
-    void Update() 
-    {
+    void Update() {
         m_HPSlider.value = m_currentPlayerHP;
     }
 }
