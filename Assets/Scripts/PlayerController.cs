@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Transform levelObject;
 
-    public int wine, grapes;
+    public int wine, grapes, wineLoss;
 
     // Start is called before the first frame update
     void Start()
@@ -46,29 +46,48 @@ public class PlayerController : MonoBehaviour
         transform.SetParent(spaceobj);
         posX = x;
         posY = y;
+        wine -= wineLoss;
         // 12:00 - the x and y are the same
         // 12:10 - myspace points to a seemingly unrelated object
         // 12:18 - it is not because the number of children has changed because of subobjects
         if (spaceobj.GetComponent<MoveSpace>().hasPickup)
         {
-            GameObject pickupobj = spaceobj.GetChild(0).gameObject;
-            Debug.Log("has pickup!" + pickupobj.name);
+            GameObject pickupobj = null;
+            foreach(Transform child in spaceobj)
+            {
+                if (child.tag == "pickup")
+                {
+                    pickupobj = child.gameObject;
+                    break;
+                }
+            }
+            if (pickupobj != null)
+            {
+                Debug.Log("has pickup!" + pickupobj.name);
 
-            if (pickupobj.name.Contains("Grape"))
-            {
-                grapes += 3;
-                Destroy(pickupobj);
-            }else if (pickupobj.name.Contains("Hazard"))
-            {
-                wine -= 1;
-            }else if (pickupobj.name.Contains("Press"))
-            {
-                wine += grapes;
-                grapes = 0;
-                // it's a berry simple formula
-            } else if (pickupobj.name.Contains("BackTrack"))
-            {
-                wine -= 1;
+                if (pickupobj.name.Contains("Grape"))
+                {
+                    grapes += 3;
+                    Destroy(pickupobj);
+                }
+                else if (pickupobj.name.Contains("Hazard"))
+                {
+                    wine -= 1;
+                }
+                else if (pickupobj.name.Contains("Press"))
+                {
+                    wine += grapes;
+                    grapes = 0;
+                    // it's a berry simple formula
+                }
+                else if (pickupobj.name.Contains("BackTrack"))
+                {
+                    wine -= 1;
+                }
+                else if (pickupobj.name.Contains("Wine"))
+                {
+                    wine += 1;
+                }
             }
         }
     }

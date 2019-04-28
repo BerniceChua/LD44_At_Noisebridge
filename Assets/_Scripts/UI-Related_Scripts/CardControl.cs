@@ -21,6 +21,8 @@ public class CardControl : MonoBehaviour
     private float tweenPos = 0f;
     public float tweenLen = 0.1f;
 
+    public GameObject hudtext;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -115,6 +117,7 @@ public class CardControl : MonoBehaviour
                 if (space != null)
                     space.hasSuggestedMove = true;
             }
+            player.wineLoss = 1;
         }
         else if (at == AbilityType.Dash)
         {
@@ -134,6 +137,7 @@ public class CardControl : MonoBehaviour
                 if (ans != null)
                     ans.hasSuggestedMove = true;
             }
+            player.wineLoss = 2;
         }
         else if (at == AbilityType.Diagonal)
         {
@@ -145,12 +149,14 @@ public class CardControl : MonoBehaviour
                 if (space != null)
                     space.hasSuggestedMove = true;
             }
+            player.wineLoss = 1;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        hudtext.GetComponent<Text>().text = "Grapes="+player.grapes+"  Wine="+player.wine;
         if (tweenUse)
         {
             tweenPos += Time.deltaTime;

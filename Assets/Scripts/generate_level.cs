@@ -50,8 +50,15 @@ public class generate_level : MonoBehaviour
                 {
                     GameObject pickupPrefab = LevelSpecification.Prefab_Pickups[pickuptype-1];
                     GameObject pickup = (GameObject)Instantiate(pickupPrefab, space.transform);
-                    pickup.transform.localPosition = new Vector3(0f, 1.5f, 0f);
-                    pickup.transform.localScale = new Vector3(.5f, .5f / pickup.transform.parent.localScale.y, .5f);
+                    pickup.transform.localPosition = new Vector3(0f, 1.1f, 0f);
+                    if (!pickup.name.Contains("dionysus"))
+                    {
+                        pickup.transform.localScale = new Vector3(.5f, .5f / pickup.transform.parent.localScale.y, .5f);
+                    }
+                    else
+                    {
+                        pickup.transform.localScale = new Vector3(20f, 20f / pickup.transform.parent.localScale.y, 20f);
+                    }
                     space.GetComponent<MoveSpace>().hasPickup = true;
                 }
             }

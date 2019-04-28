@@ -5,12 +5,13 @@ using UnityEngine;
 public enum SpaceType
 {
     NonSpace, // 0
-    Basic,
-    Hazard,
-    Start,
-    Exit,
+    Basic,  // 1
+    Hazard, // 2
+    Start,  // 3
+    Exit,   // 4
     WallLeft, // 5
-    WallRight,
-    WallTop,
+    WallRight,  // 6
+    WallTop,    // 7
     WallBottom, // 8
+    WallTopLeft //9
 }
