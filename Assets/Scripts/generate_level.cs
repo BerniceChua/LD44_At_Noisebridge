@@ -34,7 +34,27 @@ public class generate_level : MonoBehaviour
                 }
                 GameObject space = (GameObject)Instantiate(spaceprefab, StaticParent);
                 space.transform.localPosition = new Vector3((1f * i) - centerX, space.transform.localPosition.y, (1f * j)-centerZ);
-            }      
+                //if its a moveable space, give it xy coords
+                if (space.GetComponent<MoveSpace>() != null)
+                {
+                    space.GetComponent<MoveSpace>().posX = i;
+                    space.GetComponent<MoveSpace>().posY = j;
+                    space.GetComponent<MoveSpace>().moveSpaceType = (SpaceType)spacetype;
+                }
+
+
+                RowData pickupsData = LevelSpecification.pickups.rows[i];
+                int pickuptype = pickupsData.row[j];
+                //0 type is  "no pickup"
+                if (pickuptype != 0)
+                {
+                    GameObject pickupPrefab = LevelSpecification.Prefab_Pickups[pickuptype-1];
+                    GameObject pickup = (GameObject)Instantiate(pickupPrefab, space.transform);
+                    pickup.transform.localPosition = new Vector3(0f, 1.5f, 0f);
+                    pickup.transform.localScale = new Vector3(.5f, .5f / pickup.transform.parent.localScale.y, .5f);
+                    space.GetComponent<MoveSpace>().hasPickup = true;
+                }
+            }
         }
         pcon.MoveToSpace(pStartX, pStartY);
     }

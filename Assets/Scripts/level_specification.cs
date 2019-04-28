@@ -10,6 +10,7 @@ public class level_specification : ScriptableObject {
     public GameObject Prefab_Wall;
 
     public GameObject[] Prefab_Spaces;
+    public GameObject[] Prefab_Pickups;
     
     public GameObject Prefab_ExitSpace;
 
@@ -22,17 +23,7 @@ public class level_specification : ScriptableObject {
     public Vector3 Background_RootPosition;
 
     public ArrayLayout data;
+
+    public ArrayLayout pickups;
 }
 
-public enum SpaceType
-{
-    SpaceType_NonSpace,
-    SpaceType_Basic,
-    SpaceType_Hazard,
-    SpaceType_Start,
-    SpaceType_Exit,
-    SpaceType_WallLeft,
-    SpaceType_WallRight,
-    SpaceType_WallTop,
-    SpaceType_WallBottom,
-}

@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Scenes/Mark.unity
+    guid: 0824549f1a00aa44881ea9606aaaa7a1
   m_configObjects: {}

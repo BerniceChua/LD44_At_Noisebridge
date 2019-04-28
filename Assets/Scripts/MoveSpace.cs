@@ -5,6 +5,9 @@ using UnityEngine;
 public class MoveSpace : MonoBehaviour
 {
     public bool hasTurnedOn;
+    public bool hasSuggestedMove;
+    public bool hasPickup;
+    public SpaceType moveSpaceType;
 
     [SerializeField]
     Camera camera;
@@ -14,6 +17,11 @@ public class MoveSpace : MonoBehaviour
 
     [SerializeField]
     Material mat1;
+
+    [SerializeField]
+    GameObject backTrackPrefab;
+
+    public int posX, posY;
 
     // Start is called before the first frame update
     void Start()
@@ -34,19 +42,22 @@ public class MoveSpace : MonoBehaviour
             // Do something with the object that was hit by the raycast.
             if (objectHit == transform)
             {
-                Debug.Log(gameObject.name);
-                MeshRenderer renderer = GetComponent<MeshRenderer>();
-                renderer.material = mat1;
                 hasTurnedOn = true;
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && hasSuggestedMove)
                 {
+                    //instantiate a backtrack fire hazard in current space
+                    Transform playerSpace = GameObject.FindObjectOfType<PlayerController>().GetCurrentSpaceTransform();
+                    GameObject pickup = (GameObject)Instantiate(backTrackPrefab, playerSpace);
+                    pickup.transform.localPosition = new Vector3(0f, 1.5f, 0f);
+                    pickup.transform.localScale = new Vector3(.5f, .5f / pickup.transform.parent.localScale.y, .5f);
+                    playerSpace.GetComponent<MoveSpace>().hasPickup = true;
+                    Debug.Log("yo " + posX + " "+ posY);
+                    //then move
                     GameObject.FindObjectOfType<PlayerController>().MoveToSpace(transform);
+                    GameObject.FindObjectOfType<LevelViewController>().ClearSuggestedMoves();
                 }
             }else if (hasTurnedOn)
             {
-                Debug.Log("exiting2");
-                MeshRenderer renderer = GetComponent<MeshRenderer>();
-                renderer.material = mat0;
                 hasTurnedOn = false;
             }
         }
@@ -54,12 +65,18 @@ public class MoveSpace : MonoBehaviour
         {
             if (hasTurnedOn)
             {
-                Debug.Log("exiting");
-                MeshRenderer renderer = GetComponent<MeshRenderer>();
-                renderer.material = mat0;
                 hasTurnedOn = false;
             }
         }
-        
+
+        MeshRenderer renderer = GetComponent<MeshRenderer>();
+        if (hasTurnedOn || hasSuggestedMove)
+        {
+            renderer.material = mat1;
+        } else
+        {
+            renderer.material = mat0;
+        }
+
     }
 }

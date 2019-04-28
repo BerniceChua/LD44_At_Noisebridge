@@ -3,7 +3,12 @@ guid: 809dcc03abad0e94c99ccc64cfeed7e8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - camera: {instanceID: 0}
+  - mat0: {instanceID: 0}
+  - mat1: {instanceID: 0}
+  - backTrackPrefab: {fileID: 9030668785536035811, guid: da49fb4cdf955144a9266feb3b59188c,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
