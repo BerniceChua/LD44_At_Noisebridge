@@ -12,6 +12,9 @@ public class generate_level : MonoBehaviour
         float centerX = LevelSpecification.sizeX / 2f;
         float centerZ = LevelSpecification.sizeZ / 2f;
 
+        int pStartX = 0, pStartY = 0;
+        PlayerController pcon = GameObject.FindObjectOfType<PlayerController>();
+
         for (int i = 0; i < LevelSpecification.sizeX; i++)
         {
             for (int j = 0; j < LevelSpecification.sizeZ; j++)
@@ -20,11 +23,20 @@ public class generate_level : MonoBehaviour
                 //int to enum type conversion?
                 //SpaceType typeOfSpace = LevelSpecification.data[i, j];
                 RowData rowData = LevelSpecification.data.rows[i];
-                GameObject spaceprefab = LevelSpecification.Prefab_Spaces[rowData.row[j]];
+                int spacetype = rowData.row[j];
+                GameObject spaceprefab = LevelSpecification.Prefab_Spaces[spacetype];
+                if(spacetype == 3)
+                {
+                    pcon.posX = i;
+                    pcon.posY = j;
+                    pStartX = i;
+                    pStartY = j;
+                }
                 GameObject space = (GameObject)Instantiate(spaceprefab, StaticParent);
                 space.transform.localPosition = new Vector3((1f * i) - centerX, space.transform.localPosition.y, (1f * j)-centerZ);
             }      
         }
+        pcon.MoveToSpace(pStartX, pStartY);
     }
     
     public void InstantiateSpawnerContainer (GameObject Prefab_Container, Transform StaticParent, Transform DynamicParent)
