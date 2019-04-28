@@ -117,6 +117,7 @@ public class CardControl : MonoBehaviour
                 if (space != null)
                     space.hasSuggestedMove = true;
             }
+            player.wineLoss = 1;
         }
         else if (at == AbilityType.Dash)
         {
@@ -136,6 +137,7 @@ public class CardControl : MonoBehaviour
                 if (ans != null)
                     ans.hasSuggestedMove = true;
             }
+            player.wineLoss = 2;
         }
         else if (at == AbilityType.Diagonal)
         {
@@ -147,6 +149,7 @@ public class CardControl : MonoBehaviour
                 if (space != null)
                     space.hasSuggestedMove = true;
             }
+            player.wineLoss = 1;
         }
     }
 
