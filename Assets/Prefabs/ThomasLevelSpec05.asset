@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b8910618f8fba540b0429c81d30ae7f, type: 3}
-  m_Name: ThomasLevelSpec 5
+  m_Name: ThomasLevelSpec05
   m_EditorClassIdentifier: 
   Prefab_Space: {fileID: 4807362015570434950, guid: 324fdfde451bb8d4192e0d330a25a889,
     type: 3}
