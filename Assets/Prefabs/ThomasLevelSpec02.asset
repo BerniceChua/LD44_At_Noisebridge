@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b8910618f8fba540b0429c81d30ae7f, type: 3}
-  m_Name: ThomasLevelSpec03
+  m_Name: ThomasLevelSpec02
   m_EditorClassIdentifier: 
   Prefab_Space: {fileID: 4807362015570434950, guid: 324fdfde451bb8d4192e0d330a25a889,
     type: 3}
@@ -38,6 +38,13 @@ MonoBehaviour:
   Prefab_ExitSpace: {fileID: 0}
   sizeX: 7
   sizeZ: 7
+  grapeHealAmount: 0
+  wineHealAmount: 0
+  backtrackDamage: 0
+  hazardDamage: 0
+  walkDamage: 0
+  playerStartWine: 0
+  playerMaxWine: 0
   Spaces: 
   Prefab_AbilityInventory: {fileID: 0}
   Background_RootPosition: {x: 0, y: 0, z: 0}

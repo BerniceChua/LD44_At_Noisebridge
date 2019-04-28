@@ -20,6 +20,15 @@ public class PlayerController : MonoBehaviour
 
     public int wine, grapes, wineLoss;
 
+    //variable per-level properties
+    public int grapeHealAmount;
+    public int wineHealAmount;
+    public int backtrackDamage;
+    public int hazardDamage;
+    public int walkDamage;
+    public int playerStartWine;
+    public int playerMaxWine;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
                 if (pickupobj.name.Contains("Grape"))
                 {
-                    grapes += 3;
+                    grapes += grapeHealAmount;
                     Destroy(pickupobj);
                     InstantiateBackTrackHazard(ps);
                 }
@@ -80,23 +89,26 @@ public class PlayerController : MonoBehaviour
                 {
                     spaceobj.GetComponent<MoveSpace>().hasPickup = true;
 
-                    wine -= 1;
+                    wine -= hazardDamage;
                 }
                 else if (pickupobj.name.Contains("Press"))
                 {
                     spaceobj.GetComponent<MoveSpace>().hasPickup = true;
 
                     wine += grapes;
+                    wine = Mathf.Clamp(wine, 0, playerMaxWine+1);
                     grapes = 0;
                     // it's a berry simple formula
                 }
                 else if (pickupobj.name.Contains("BackTrack"))
                 {
-                    wine -= 1;
+                    wine -= backtrackDamage;
                 }
                 else if (pickupobj.name.Contains("Wine"))
                 {
-                    wine += 1;
+                    wine += wineHealAmount;
+                    wine = Mathf.Clamp(wine, 0, playerMaxWine+1);
+
                     Destroy(pickupobj);
                     InstantiateBackTrackHazard(ps);
                 }
@@ -137,8 +149,8 @@ public class PlayerController : MonoBehaviour
     public void InstantiateBackTrackHazard(Transform playerSpace)
     {
         GameObject pickup = (GameObject)Instantiate(backTrackPrefab, playerSpace);
-        pickup.transform.localPosition = new Vector3(0f, 1.5f, 0f);
-        pickup.transform.localScale = new Vector3(.5f, .5f / pickup.transform.parent.localScale.y, .5f);
+        pickup.transform.localPosition = new Vector3(0f, 4.5f, 0f);
+        pickup.transform.localScale = new Vector3(1f, 1f / pickup.transform.parent.localScale.y, 1f);
         playerSpace.GetComponent<MoveSpace>().hasPickup = true;
     }
 
