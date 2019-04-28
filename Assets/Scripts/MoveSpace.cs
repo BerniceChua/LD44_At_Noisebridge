@@ -51,11 +51,12 @@ public class MoveSpace : MonoBehaviour
             {
                 hasTurnedOn = true;
                 bool isCardinal = false;
-                int xdist = Mathf.Abs(GameObject.FindObjectOfType<PlayerController>().posX - posX);
-                int ydist = Mathf.Abs(GameObject.FindObjectOfType<PlayerController>().posY - posY);
-                if ((xdist <= 1) && (ydist <= 1) && (xdist + ydist == 1) ) // wall check
+                int fromX = GameObject.FindObjectOfType<PlayerController>().posX;
+                int fromY = GameObject.FindObjectOfType<PlayerController>().posY;
+                int xdist = Mathf.Abs(fromX - posX);
+                int ydist = Mathf.Abs(fromY - posY);
+                if ((xdist <= 1) && (ydist <= 1) && (xdist + ydist == 1) && !GameObject.FindObjectOfType<CardControl>().Blocked(fromX, fromY, posX, posY))
                 {
-                    Debug.Log("blerg");
                     isCardinal = true;
                     Transform playerSpace = GameObject.FindObjectOfType<PlayerController>().GetCurrentSpaceTransform();
                     playerSpace.GetComponent<MoveSpace>().wineLoss = 1;
