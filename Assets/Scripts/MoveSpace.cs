@@ -27,6 +27,7 @@ public class MoveSpace : MonoBehaviour
     void Start()
     {
         camera = GameObject.FindObjectOfType<Camera>();
+        gameObject.layer = 8; // set layer to "Pickable"
     }
 
     // Update is called once per frame
@@ -35,7 +36,10 @@ public class MoveSpace : MonoBehaviour
         RaycastHit hit;
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit))
+        
+        LayerMask mask = LayerMask.GetMask("Pickable");
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
         {
             Transform objectHit = hit.transform;
 
