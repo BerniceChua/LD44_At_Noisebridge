@@ -107,7 +107,7 @@ public class CardControl : MonoBehaviour
         GameObject.FindObjectOfType<LevelViewController>().ClearSuggestedMoves();
 
         // highlight by type
-        if (at == AbilityType.Basic)
+        //if (at == AbilityType.Basic)
         {
             int[,] offsets = new int[,] { { -1, 0 }, { 0, -1 }, { 1, 0 }, { 0, 1 } };
             Debug.Log(player.posX + ","+player.posY);
@@ -115,11 +115,13 @@ public class CardControl : MonoBehaviour
             {
                 MoveSpace space = getGrid(offsets[i,0] + player.posX, offsets[i,1] + player.posY);
                 if (space != null)
+                {
                     space.hasSuggestedMove = true;
+                    space.wineLoss = 1;
+                }
             }
-            player.wineLoss = 1;
         }
-        else if (at == AbilityType.Dash)
+        if (at == AbilityType.Dash)
         {
             int[,] offsets = new int[,] { { -1, 0 }, { 0, -1 }, { 1, 0 }, { 0, 1 } };
             Debug.Log(player.posX + "," + player.posY);
@@ -135,9 +137,11 @@ public class CardControl : MonoBehaviour
                     ans = getGrid(nx, ny);
                 }
                 if (ans != null)
+                {
                     ans.hasSuggestedMove = true;
+                    ans.wineLoss = 2;
+                }
             }
-            player.wineLoss = 2;
         }
         else if (at == AbilityType.Diagonal)
         {
@@ -146,10 +150,11 @@ public class CardControl : MonoBehaviour
             for (int i = 0; i < 4; i++)
             {
                 MoveSpace space = getGrid(offsets[i, 0] + player.posX, offsets[i, 1] + player.posY);
-                if (space != null)
+                if (space != null) { 
                     space.hasSuggestedMove = true;
+                    space.wineLoss = 1;
+                }
             }
-            player.wineLoss = 1;
         }
     }
 

@@ -7,6 +7,7 @@ public class MoveSpace : MonoBehaviour
     public bool hasTurnedOn;
     public bool hasSuggestedMove;
     public bool hasPickup;
+    public int wineLoss;
     public SpaceType moveSpaceType;
 
     [SerializeField]
@@ -20,6 +21,8 @@ public class MoveSpace : MonoBehaviour
 
     [SerializeField]
     GameObject backTrackPrefab;
+
+    public LevelViewController levelController;
 
     public int posX, posY;
 
@@ -47,17 +50,24 @@ public class MoveSpace : MonoBehaviour
             if (objectHit == transform)
             {
                 hasTurnedOn = true;
-                if (Input.GetMouseButtonDown(0) && hasSuggestedMove)
+                bool isCardinal = false;
+                int xdist = Mathf.Abs(GameObject.FindObjectOfType<PlayerController>().posX - posX);
+                int ydist = Mathf.Abs(GameObject.FindObjectOfType<PlayerController>().posY - posY);
+                if ((xdist <= 1) && (ydist <= 1) && (xdist + ydist == 1) ) // wall check
+                {
+                    Debug.Log("blerg");
+                    isCardinal = true;
+                    Transform playerSpace = GameObject.FindObjectOfType<PlayerController>().GetCurrentSpaceTransform();
+                    playerSpace.GetComponent<MoveSpace>().wineLoss = 1;
+                }
+               if (Input.GetMouseButtonDown(0) && (hasSuggestedMove || isCardinal))
                 {
                     //instantiate a backtrack fire hazard in current space
                     Transform playerSpace = GameObject.FindObjectOfType<PlayerController>().GetCurrentSpaceTransform();
-                    GameObject pickup = (GameObject)Instantiate(backTrackPrefab, playerSpace);
-                    pickup.transform.localPosition = new Vector3(0f, 1.5f, 0f);
-                    pickup.transform.localScale = new Vector3(.5f, .5f / pickup.transform.parent.localScale.y, .5f);
-                    playerSpace.GetComponent<MoveSpace>().hasPickup = true;
+                   
                     Debug.Log("yo " + posX + " "+ posY);
                     //then move
-                    GameObject.FindObjectOfType<PlayerController>().MoveToSpace(transform);
+                    GameObject.FindObjectOfType<PlayerController>().MoveToSpace(transform, playerSpace);
                     GameObject.FindObjectOfType<LevelViewController>().ClearSuggestedMoves();
                 }
             }else if (hasTurnedOn)
