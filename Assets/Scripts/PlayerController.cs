@@ -70,6 +70,10 @@ public class PlayerController : MonoBehaviour
             {
                 wine -= 1;
             }
+            else if (pickupobj.name.Contains("Wine"))
+            {
+                wine += 1;
+            }
         }
     }
 
