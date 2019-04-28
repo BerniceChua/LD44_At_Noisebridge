@@ -49,6 +49,24 @@ ModelImporter:
     100086: symmetryConstraint8
     100088: symmetryConstraint9
     100090: transform1
+    100092: all_bones
+    100094: all_ctrl
+    100096: all_geom
+    100098: body
+    100100: clothes
+    100102: ikHandle3
+    100104: ikHandle4
+    100106: joint27
+    100108: joint28
+    100110: left_eye
+    100112: left_ft_ctrl1
+    100114: left_ft_ctrl2
+    100116: left_wrist_ctrl
+    100118: right_eye
+    100120: right_ft_ctrl
+    100122: right_ft_ctrl3
+    100124: right_wrist_ctrl
+    100126: root_ctrl
     400000: //RootNode
     400002: imagePlane1
     400004: joint1
@@ -95,24 +113,56 @@ ModelImporter:
     400086: symmetryConstraint8
     400088: symmetryConstraint9
     400090: transform1
+    400092: all_bones
+    400094: all_ctrl
+    400096: all_geom
+    400098: body
+    400100: clothes
+    400102: ikHandle3
+    400104: ikHandle4
+    400106: joint27
+    400108: joint28
+    400110: left_eye
+    400112: left_ft_ctrl1
+    400114: left_ft_ctrl2
+    400116: left_wrist_ctrl
+    400118: right_eye
+    400120: right_ft_ctrl
+    400122: right_ft_ctrl3
+    400124: right_wrist_ctrl
+    400126: root_ctrl
     2100000: lambert2
     2100002: crown
     2100004: white
+    2100006: lambert1
     2300000: pCylinder1
     2300002: polySurface1
     2300004: polySurface2
     2300006: pSphere1
     2300008: pSphere2
+    2300010: body
+    2300012: clothes
+    2300014: left_eye
+    2300016: right_eye
     3300000: pCylinder1
     3300002: polySurface1
     3300004: polySurface2
     3300006: pSphere1
     3300008: pSphere2
+    3300010: body
+    3300012: clothes
+    3300014: left_eye
+    3300016: right_eye
     4300000: polySurface1
     4300002: polySurface2
     4300004: pSphere1
     4300006: pSphere2
     4300008: pCylinder1
+    4300010: clothes
+    4300012: left_eye
+    4300014: right_eye
+    4300016: body
+    7400000: Take 001
     9500000: //RootNode
   externalObjects: {}
   materials:
