@@ -8,5 +8,7 @@ public enum PickupType
     Grape,
     Hazard,
     Press,
-    BackTrack
+    BackTrack,
+    Start,  //5
+    Exit    //6
 }

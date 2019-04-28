@@ -1077,7 +1077,10 @@ MonoBehaviour:
   posX: 0
   posY: 0
   levelSize: 7
+  myspace: {fileID: 0}
   levelObject: {fileID: 1371145808}
+  wine: 0
+  grapes: 0
 --- !u!1 &2091631133
 GameObject:
   m_ObjectHideFlags: 0

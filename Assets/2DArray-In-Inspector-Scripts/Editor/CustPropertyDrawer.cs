@@ -16,7 +16,7 @@ public class CustPropertyDrawer : PropertyDrawer {
 			SerializedProperty row = data.GetArrayElementAtIndex(j).FindPropertyRelative("row");
 			newposition.height = 18f;
 			if(row.arraySize != 7)
-				row.arraySize = 7;
+				row.arraySize = 7; 
 			newposition.width = position.width/7;
 			for(int i=0;i<7;i++){
 				EditorGUI.PropertyField(newposition,row.GetArrayElementAtIndex(i),GUIContent.none);
