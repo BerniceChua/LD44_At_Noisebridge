@@ -17,17 +17,12 @@ public class PlayerController : MonoBehaviour
 
     public int wine, grapes, wineLoss;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private bool m_reachedExit = false;
+    public bool ReachedExit {
+        get { return m_reachedExit; }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     public Transform GetCurrentSpaceTransform()
     {
@@ -87,6 +82,9 @@ public class PlayerController : MonoBehaviour
                 else if (pickupobj.name.Contains("Wine"))
                 {
                     wine += 1;
+                } else if (pickupobj.name.Contains("dionysus")) {
+                    /// This is the 'success' condition, to exit the game loop. ^_^
+                    m_reachedExit = true;
                 }
             }
         }
@@ -96,5 +94,19 @@ public class PlayerController : MonoBehaviour
     public void MoveToSpace(Transform t)
     {
         MoveToSpace(t.GetComponent<MoveSpace>().posX, t.GetComponent<MoveSpace>().posY);
+    }
+
+    // Used during the phases of the game where the player should be able to control their characters.
+    public void EnableControl() {
+        this.enabled = true;
+    }
+
+    /// Used during the phases of the game where the player shouldn't be able to control their characters.
+    public void DisableControl() {
+        this.enabled = false;
+        //m_CanvasGameObject.SetActive(false);
+
+        //this.m_ForwardSwimSpeed = 0.0f;
+        this.transform.Translate(0.0f, 0.5f, 0.0f);
     }
 }
