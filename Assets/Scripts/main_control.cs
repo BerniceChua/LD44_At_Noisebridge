@@ -12,13 +12,16 @@ public class main_control : MonoBehaviour {
     // relying on Unity as a black box.
     
     public Transform StaticParent;
-    
+
+    [SerializeField] private GameLoopManager m_gameLoopManager;
+
     void Awake ()
     {
-        // Create the Level, spawn characters
-        generate_level LevelGenerator = FindObjectOfType<generate_level>();
-        LevelGenerator.GenerateLevel(StaticParent);
-        
+        //// Create the Level, spawn characters
+        //generate_level LevelGenerator = FindObjectOfType<generate_level>();
+        //LevelGenerator.GenerateLevel(StaticParent);
+
+        StartCoroutine(m_gameLoopManager.GameLoop());
     }
     
 }

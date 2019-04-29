@@ -7,7 +7,7 @@ public class generate_level : MonoBehaviour
     
     public level_specification LevelSpecification;
     
-    public void GenerateLevel (Transform StaticParent)
+    public void GenerateLevel (Transform StaticParent, level_specification LevelSpecification)
     {
         float centerX = LevelSpecification.sizeX / 2f;
         float centerZ = LevelSpecification.sizeZ / 2f;

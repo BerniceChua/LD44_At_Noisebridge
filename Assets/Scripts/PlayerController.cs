@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
 
     public int wine, grapes, wineLoss;
 
+    private bool m_reachedExit = false;
+    public bool ReachedExit {
+        get { return m_reachedExit; }
+    }
+
     //variable per-level properties
     public int grapeHealAmount;
     public int wineHealAmount;
@@ -29,17 +34,7 @@ public class PlayerController : MonoBehaviour
     public int playerStartWine;
     public int playerMaxWine;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public Transform GetCurrentSpaceTransform()
     {
@@ -78,38 +73,32 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("has pickup!" + pickupobj.name);
 
-                if (pickupobj.name.Contains("Grape"))
-                {
+                if (pickupobj.name.Contains("Grape")) {
                     grapes += grapeHealAmount;
                     Destroy(pickupobj);
                     InstantiateBackTrackHazard(ps);
-                }
-                else if (pickupobj.name.Contains("Hazard"))
-                {
+                } else if (pickupobj.name.Contains("Hazard")) {
                     spaceobj.GetComponent<MoveSpace>().hasPickup = true;
 
                     wine -= hazardDamage;
-                }
-                else if (pickupobj.name.Contains("Press"))
-                {
+                } else if (pickupobj.name.Contains("Press")) {
                     spaceobj.GetComponent<MoveSpace>().hasPickup = true;
 
                     wine += grapes;
-                    wine = Mathf.Clamp(wine, 0, playerMaxWine+1);
+                    wine = Mathf.Clamp(wine, 0, playerMaxWine + 1);
                     grapes = 0;
                     // it's a berry simple formula
-                }
-                else if (pickupobj.name.Contains("fire"))
-                {
+                } else if (pickupobj.name.Contains("fire")) {
                     wine -= backtrackDamage;
-                }
-                else if (pickupobj.name.Contains("Wine"))
-                {
+                } else if (pickupobj.name.Contains("Wine")) {
                     wine += wineHealAmount;
-                    wine = Mathf.Clamp(wine, 0, playerMaxWine+1);
+                    wine = Mathf.Clamp(wine, 0, playerMaxWine + 1);
 
                     Destroy(pickupobj);
                     InstantiateBackTrackHazard(ps);
+                } else if (pickupobj.name.Contains("dionysus")) {
+                    /// This is the 'success' condition, to exit the game loop. ^_^
+                    m_reachedExit = true;
                 }
             }
 
@@ -142,8 +131,8 @@ public class PlayerController : MonoBehaviour
                 {
                     if (pickupobj.name.Contains("Grape") || pickupobj.name.Contains("Wine"))
                         InstantiateBackTrackHazard(ps);
-                }
             }
+        }
         }
     }
 
@@ -160,5 +149,19 @@ public class PlayerController : MonoBehaviour
     public void MoveToSpace(Transform t, Transform ps)
     {
         MoveToSpace(t.GetComponent<MoveSpace>().posX, t.GetComponent<MoveSpace>().posY, ps);
+    }
+
+    // Used during the phases of the game where the player should be able to control their characters.
+    public void EnableControl() {
+        this.enabled = true;
+    }
+
+    /// Used during the phases of the game where the player shouldn't be able to control their characters.
+    public void DisableControl() {
+        this.enabled = false;
+        //m_CanvasGameObject.SetActive(false);
+
+        //this.m_ForwardSwimSpeed = 0.0f;
+        this.transform.Translate(0.0f, 0.5f, 0.0f);
     }
 }
