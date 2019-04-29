@@ -98,8 +98,37 @@ public class PlayerController : MonoBehaviour
         Debug.Log(spaceobj);
         transform.SetParent(spaceobj);
         //Debug.Break();
+
+        // turn player towards direction of travel
+        if (posX < x)
+        {
+            transform.localEulerAngles = new Vector3(0f, 90f, 0f);
+        }
+        if (posX > x)
+        {
+            transform.localEulerAngles = new Vector3(0f, 270f, 0f);
+        }
+        if (posY < y)
+        {
+            transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+        if (posY > y)
+        {
+            transform.localEulerAngles = new Vector3(0f, 180f, 0f);
+        }
+
+        // turn dionysus towards player
+        foreach (GameObject pickup in GameObject.FindGameObjectsWithTag("pickup")) {
+            if (pickup.name.Contains("dionysus")) {
+                Vector3 direction = transform.position - pickup.transform.position;
+                direction.y = 0;
+                pickup.transform.localRotation = Quaternion.LookRotation(direction, pickup.transform.up);
+            }
+        }
+
         posX = x;
         posY = y;
+
         // 12:00 - the x and y are the same
         // 12:10 - myspace points to a seemingly unrelated object
         // 12:18 - it is not because the number of children has changed because of subobjects
