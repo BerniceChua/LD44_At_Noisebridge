@@ -459,7 +459,7 @@ RectTransform:
   - {fileID: 2029299398}
   - {fileID: 1732350266}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1085,7 +1085,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &813697595
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1619,7 +1619,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '[Game Result Here]'
+  m_Text: 
 --- !u!222 &897969447
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2569,7 +2569,7 @@ PrefabInstance:
     - target: {fileID: 8671290242670995563, guid: 0376b3889145c0049bcf4c915723b1ea,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8671290242670995563, guid: 0376b3889145c0049bcf4c915723b1ea,
         type: 3}
@@ -2810,7 +2810,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 25, y: -30, z: 0}
 --- !u!4 &1610978272 stripped
 Transform:
@@ -3501,7 +3501,7 @@ RectTransform:
   - {fileID: 1802930636}
   - {fileID: 1048366625}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
