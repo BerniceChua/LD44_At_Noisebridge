@@ -39,8 +39,8 @@ MonoBehaviour:
   Prefab_ExitSpace: {fileID: 0}
   sizeX: 7
   sizeZ: 7
-  grapeHealAmount: 4
-  wineHealAmount: 3
+  grapeHealAmount: 3
+  wineHealAmount: 4
   backtrackDamage: 1
   hazardDamage: 1
   walkDamage: 1
