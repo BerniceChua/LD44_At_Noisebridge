@@ -49,6 +49,7 @@ public class MoveSpace : MonoBehaviour
             // Do something with the object that was hit by the raycast.
             if (objectHit == transform)
             {
+                PlayerController pcon = GameObject.FindObjectOfType<PlayerController>();
                 hasTurnedOn = true;
                 bool isCardinal = false;
                 int fromX = GameObject.FindObjectOfType<PlayerController>().posX;
@@ -58,13 +59,14 @@ public class MoveSpace : MonoBehaviour
                 if ((xdist <= 1) && (ydist <= 1) && (xdist + ydist == 1) && !GameObject.FindObjectOfType<CardControl>().Blocked(fromX, fromY, posX, posY))
                 {
                     isCardinal = true;
-                    Transform playerSpace = GameObject.FindObjectOfType<PlayerController>().GetCurrentSpaceTransform();
-                    playerSpace.GetComponent<MoveSpace>().wineLoss = 1;
+                    Transform playerSpace = pcon.GetCurrentSpaceTransform();
+                    wineLoss = 1;
+                    //playerSpace.GetComponent<MoveSpace>().wineLoss = pcon.walkDamage;
                 }
                if (Input.GetMouseButtonDown(0) && (hasSuggestedMove || isCardinal))
                 {
                     //instantiate a backtrack fire hazard in current space
-                    Transform playerSpace = GameObject.FindObjectOfType<PlayerController>().GetCurrentSpaceTransform();
+                    Transform playerSpace = pcon.GetCurrentSpaceTransform();
                    
                     Debug.Log("yo " + posX + " "+ posY);
                     //then move

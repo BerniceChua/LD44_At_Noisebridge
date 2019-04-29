@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour
         transform.SetParent(spaceobj);
         posX = x;
         posY = y;
-        //wine -= wineLoss;
         // 12:00 - the x and y are the same
         // 12:10 - myspace points to a seemingly unrelated object
         // 12:18 - it is not because the number of children has changed because of subobjects
@@ -119,7 +118,9 @@ public class PlayerController : MonoBehaviour
         //check if we should add backtrack hazard
         if (ps != null)
         {
-            wine -= ps.GetComponent<MoveSpace>().wineLoss;
+            wine -= spaceobj.GetComponent<MoveSpace>().wineLoss;
+
+            //wine -= ps.GetComponent<MoveSpace>().wineLoss;
             //if no pickup, create backtrack hazard
             if (!ps.GetComponent<MoveSpace>().hasPickup)
             {

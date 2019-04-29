@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04fe969601e26234989efc95e3fc5a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelSpecification: {fileID: 11400000, guid: 7d20fade87abc1847b9ca1ed5ccad641, type: 2}
+  LevelSpecification: {fileID: 11400000, guid: cb43dacff2da07a48a4c8dfe9dc0b498, type: 2}
 --- !u!114 &870659069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -942,6 +942,8 @@ MonoBehaviour:
   - {fileID: 2102596004}
   levelObject: {fileID: 1371145808}
   player: {fileID: 1876819900}
+  dashLoss: 0
+  diagLoss: 0
   tweenUse: 0
   tweenLen: 0.15
   hudtext: {fileID: 1048366624}

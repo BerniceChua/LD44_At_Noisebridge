@@ -17,6 +17,8 @@ public class CardControl : MonoBehaviour
 
     int levelSize = 7;
 
+    public int dashLoss, diagLoss;
+
     public bool tweenUse = false;
     private float tweenPos = 0f;
     public float tweenLen = 0.1f;
@@ -143,7 +145,7 @@ public class CardControl : MonoBehaviour
                 if (ans != null)
                 {
                     ans.hasSuggestedMove = true;
-                    ans.wineLoss = 2;
+                    ans.wineLoss = dashLoss;
                 }
             }
         }
@@ -160,7 +162,7 @@ public class CardControl : MonoBehaviour
                 MoveSpace space = getGrid(nx1, ny1);
                 if (space != null && ((!Blocked(nx0,ny0,nx1,ny0) && !Blocked(nx1,ny0,nx1,ny1)) || (!Blocked(nx0,ny0,nx0,ny1) && !Blocked(nx0,ny1,nx1,ny1)))) { 
                     space.hasSuggestedMove = true;
-                    space.wineLoss = 1;
+                    space.wineLoss = diagLoss;
                 }
             }
         }

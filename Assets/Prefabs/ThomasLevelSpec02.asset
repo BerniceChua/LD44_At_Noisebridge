@@ -44,6 +44,8 @@ MonoBehaviour:
   backtrackDamage: 1
   hazardDamage: 1
   walkDamage: 1
+  dashDamage: 3
+  diagDamage: 2
   playerStartWine: 8
   playerMaxWine: 8
   Spaces: 

@@ -21,6 +21,8 @@ public class level_specification : ScriptableObject {
     public int backtrackDamage;
     public int hazardDamage;
     public int walkDamage;
+    public int dashDamage;
+    public int diagDamage;
     public int playerStartWine;
     public int playerMaxWine;
 

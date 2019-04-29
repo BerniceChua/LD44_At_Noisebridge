@@ -23,6 +23,11 @@ public class generate_level : MonoBehaviour
         pcon.playerStartWine = LevelSpecification.playerStartWine;
         pcon.playerMaxWine = LevelSpecification.playerMaxWine;
         pcon.wine = pcon.playerStartWine;
+
+        CardControl abilityController = GameObject.FindObjectOfType<CardControl>();
+        abilityController.dashLoss = LevelSpecification.dashDamage;
+        abilityController.diagLoss = LevelSpecification.diagDamage;
+
         for (int i = 0; i < LevelSpecification.sizeX; i++)
         {
             for (int j = 0; j < LevelSpecification.sizeZ; j++)
