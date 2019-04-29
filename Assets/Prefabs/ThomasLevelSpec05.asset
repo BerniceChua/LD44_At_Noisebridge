@@ -39,11 +39,13 @@ MonoBehaviour:
   Prefab_ExitSpace: {fileID: 0}
   sizeX: 7
   sizeZ: 7
-  grapeHealAmount: 4
-  wineHealAmount: 3
+  grapeHealAmount: 3
+  wineHealAmount: 4
   backtrackDamage: 1
   hazardDamage: 1
   walkDamage: 1
+  dashDamage: 3
+  diagDamage: 2
   playerStartWine: 8
   playerMaxWine: 8
   Spaces: 
@@ -62,7 +64,7 @@ MonoBehaviour:
   pickups:
     rowSize: 0
     rows:
-    - row: 00000000070000000000000002000000000000000000000000000000
+    - row: 00000000070000000000000000000000020000000000000000000000
     - row: 00000000020000000000000000000000000000000000000005000000
     - row: 00000000070000000700000000000000000000000000000007000000
     - row: 00000000000000000000000007000000070000000700000000000000

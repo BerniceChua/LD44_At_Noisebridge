@@ -21,7 +21,7 @@ public class main_control : MonoBehaviour {
         //generate_level LevelGenerator = FindObjectOfType<generate_level>();
         //LevelGenerator.GenerateLevel(StaticParent);
 
-        StartCoroutine(m_gameLoopManager.GameLoop());
+        //StartCoroutine(m_gameLoopManager.GameLoop());
     }
     
 }

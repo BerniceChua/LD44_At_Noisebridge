@@ -17,6 +17,8 @@ public class CardControl : MonoBehaviour
 
     int levelSize = 7;
 
+    public int dashLoss, diagLoss;
+
     public bool tweenUse = false;
     private float tweenPos = 0f;
     public float tweenLen = 0.1f;
@@ -79,24 +81,24 @@ public class CardControl : MonoBehaviour
         if (dirx > 0)
         {
             // right
-            return (space0.moveSpaceType == SpaceType.WallRight || space1.moveSpaceType == SpaceType.WallLeft);
+            return (space0.moveSpaceType == SpaceType.WallRight || space1.moveSpaceType == SpaceType.WallLeft || space1.moveSpaceType == SpaceType.WallTopLeft);
         }
         if (dirx < 0)
         {
             // left
-            return (space0.moveSpaceType == SpaceType.WallLeft || space1.moveSpaceType == SpaceType.WallRight);
+            return (space0.moveSpaceType == SpaceType.WallLeft || space1.moveSpaceType == SpaceType.WallRight || space0.moveSpaceType == SpaceType.WallTopLeft);
         }
         if (diry > 0)
         {
             //2019-04-28 3:08 PM - if I flip down/up it fixes one bug and surfaces a different one.
 
             // down
-            return (space0.moveSpaceType == SpaceType.WallTop || space1.moveSpaceType == SpaceType.WallBottom);
+            return (space0.moveSpaceType == SpaceType.WallTop || space1.moveSpaceType == SpaceType.WallBottom || space0.moveSpaceType == SpaceType.WallTopLeft);
         }
         if (diry < 0)
         {
             // up
-            return (space0.moveSpaceType == SpaceType.WallBottom || space1.moveSpaceType == SpaceType.WallTop);
+            return (space0.moveSpaceType == SpaceType.WallBottom || space1.moveSpaceType == SpaceType.WallTop || space1.moveSpaceType == SpaceType.WallTopLeft);
         }
         return false;
     }
@@ -110,7 +112,7 @@ public class CardControl : MonoBehaviour
 
         // highlight by type
         //if (at == AbilityType.Basic)
-        {
+        if (false) {
             int[,] offsets = new int[,] { { -1, 0 }, { 0, -1 }, { 1, 0 }, { 0, 1 } };
             Debug.Log(player.posX + ","+player.posY);
             for (int i=0; i<4; i++)
@@ -143,7 +145,7 @@ public class CardControl : MonoBehaviour
                 if (ans != null)
                 {
                     ans.hasSuggestedMove = true;
-                    ans.wineLoss = 2;
+                    ans.wineLoss = dashLoss;
                 }
             }
         }
@@ -160,7 +162,7 @@ public class CardControl : MonoBehaviour
                 MoveSpace space = getGrid(nx1, ny1);
                 if (space != null && ((!Blocked(nx0,ny0,nx1,ny0) && !Blocked(nx1,ny0,nx1,ny1)) || (!Blocked(nx0,ny0,nx0,ny1) && !Blocked(nx0,ny1,nx1,ny1)))) { 
                     space.hasSuggestedMove = true;
-                    space.wineLoss = 1;
+                    space.wineLoss = diagLoss;
                 }
             }
         }

@@ -13,12 +13,16 @@ public class LevelViewController : MonoBehaviour
     Camera mainCamera;
 
     bool leftClicking, rightClicking;
+    double momentumX;
+    double momentumY;
 
     // Start is called before the first frame update
     void Start()
     {
         leftClicking = false;
         rightClicking = false;
+        momentumX = 0f;
+        momentumY = 0f;
     }
 
     // Update is called once per frame
@@ -29,15 +33,20 @@ public class LevelViewController : MonoBehaviour
         if (leftClicking)
         {
 
-            mouseSpeedX = Input.GetAxis("Mouse X");
-            levelTransform.eulerAngles += new Vector3(0f, mouseSpeedX, 0f);
         }
         if (rightClicking)
         {
+            GameObject.FindObjectOfType<LevelViewController>().ClearSuggestedMoves();
+            mouseSpeedX = Input.GetAxis("Mouse X");
             mouseSpeedY = Input.GetAxis("Mouse Y");
-            mainCamera.orthographicSize -= mouseSpeedY / 2f;
-            mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, 2.5f, 5.0f);
+            momentumY -= mouseSpeedY / 8f;
+            momentumX += mouseSpeedX * 4;
         }
+        momentumX = momentumX * 0.9;
+        levelTransform.eulerAngles += new Vector3(0f, (float)(momentumX), 0f);
+        momentumY = momentumY * 0.9;
+        mainCamera.orthographicSize += (float)momentumY;
+        mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, 2.5f, 5.0f);
     }
 
     public void ClearSuggestedMoves()
