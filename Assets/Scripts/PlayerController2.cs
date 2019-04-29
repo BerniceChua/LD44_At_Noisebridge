@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController2 : MonoBehaviour
 {
 
     [SerializeField]
@@ -12,10 +12,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform myspace;
 
-    public bool Cheated;
-
-    [SerializeField]
-    public Transform levelObject;
+    //[SerializeField] Transform levelObject;
+    Transform levelObject { get { return GameObject.FindObjectOfType<LevelObject>().transform; } set { levelObject = value; } }
 
     [SerializeField]
     GameObject backTrackPrefab;
@@ -25,7 +23,6 @@ public class PlayerController : MonoBehaviour
     private bool m_reachedExit = false;
     public bool ReachedExit {
         get { return m_reachedExit; }
-        set { m_reachedExit = value; }
     }
 
     //variable per-level properties
@@ -37,14 +34,7 @@ public class PlayerController : MonoBehaviour
     public int playerStartWine;
     public int playerMaxWine;
 
-    void Update()
-    {
-        if (Input.GetKeyDown("0"))
-        {
-            Debug.Log("cheated");
-            Cheated = true;
-        }
-    }
+
 
     public Transform GetCurrentSpaceTransform()
     {
@@ -58,15 +48,12 @@ public class PlayerController : MonoBehaviour
         Transform spaceobj = levelObject.GetChild((levelSize * x) + y);
         Debug.Log(levelSize * x + y);
         myspace = spaceobj;
-        Debug.Log(myspace);
         Debug.Log(spaceobj.GetComponent<MoveSpace>().hasPickup);
         transform.position = new Vector3(spaceobj.position.x, .5f, spaceobj.position.z);
-        //Debug.Break();
-        Debug.Log(spaceobj);
         transform.SetParent(spaceobj);
-        //Debug.Break();
         posX = x;
         posY = y;
+        //wine -= wineLoss;
         // 12:00 - the x and y are the same
         // 12:10 - myspace points to a seemingly unrelated object
         // 12:18 - it is not because the number of children has changed because of subobjects
@@ -121,9 +108,7 @@ public class PlayerController : MonoBehaviour
         //check if we should add backtrack hazard
         if (ps != null)
         {
-            wine -= spaceobj.GetComponent<MoveSpace>().wineLoss;
-
-            //wine -= ps.GetComponent<MoveSpace>().wineLoss;
+            wine -= ps.GetComponent<MoveSpace>().wineLoss;
             //if no pickup, create backtrack hazard
             if (!ps.GetComponent<MoveSpace>().hasPickup)
             {
@@ -148,13 +133,6 @@ public class PlayerController : MonoBehaviour
             }
         }
         }
-        Debug.Log("end of movetospace"+spaceobj);
-    }
-
-    void OnDestroy()
-    {
-        Debug.Log(UnityEngine.StackTraceUtility.ExtractStackTrace());
-        //Debug.Break();
     }
 
     public void InstantiateBackTrackHazard(Transform playerSpace)
@@ -179,7 +157,6 @@ public class PlayerController : MonoBehaviour
 
     /// Used during the phases of the game where the player shouldn't be able to control their characters.
     public void DisableControl() {
-        
         this.enabled = false;
         //m_CanvasGameObject.SetActive(false);
 
