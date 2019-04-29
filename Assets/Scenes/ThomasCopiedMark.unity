@@ -1395,12 +1395,7 @@ MonoBehaviour:
   StaticParent: {fileID: 1371145808}
   m_levelGenerator: {fileID: 870659068}
   m_ArrayOfLevels:
-  - {fileID: 11400000, guid: cb43dacff2da07a48a4c8dfe9dc0b498, type: 2}
-  - {fileID: 11400000, guid: 5de79408453c22a44a928044bc667afc, type: 2}
-  - {fileID: 11400000, guid: 808036b14cbe2724292c61f65abfc765, type: 2}
-  - {fileID: 11400000, guid: 35bc9a71d471cb44d958868999b1516e, type: 2}
   - {fileID: 11400000, guid: 7d20fade87abc1847b9ca1ed5ccad641, type: 2}
-  - {fileID: 11400000, guid: df6ad87880db35547a0481aa03308950, type: 2}
 --- !u!1 &873399224
 GameObject:
   m_ObjectHideFlags: 0
@@ -3827,16 +3822,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6716582712749079861, guid: 3f88719786ccfdc438bc7fab99a457e7,
-        type: 3}
-      propertyPath: levelObject
-      value: 
-      objectReference: {fileID: 1371145808}
-    - target: {fileID: 6716582712749079858, guid: 3f88719786ccfdc438bc7fab99a457e7,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.54
-      objectReference: {fileID: 0}
     - target: {fileID: 3999213417968678313, guid: 8e0a0f226d7b4254f8c7018cc7bd7152,
         type: 3}
       propertyPath: m_Name
@@ -3847,6 +3832,16 @@ PrefabInstance:
       propertyPath: levelObject
       value: 
       objectReference: {fileID: 1371145808}
+    - target: {fileID: 6716582712749079861, guid: 3f88719786ccfdc438bc7fab99a457e7,
+        type: 3}
+      propertyPath: levelObject
+      value: 
+      objectReference: {fileID: 1371145808}
+    - target: {fileID: 6716582712749079858, guid: 3f88719786ccfdc438bc7fab99a457e7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.54
+      objectReference: {fileID: 0}
     - target: {fileID: 3999213417968183689, guid: 8e0a0f226d7b4254f8c7018cc7bd7152,
         type: 3}
       propertyPath: m_LocalPosition.y
