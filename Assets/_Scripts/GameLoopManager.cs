@@ -112,7 +112,7 @@ public class GameLoopManager : MonoBehaviour {
             while (!Input.GetKey(KeyCode.Return))yield return null;
             if (Input.GetKey(KeyCode.Return)) {
                 //if we died instead of reaching end, hold back sceneCount so we do the same scene again
-                if (m_playerController.ReachedExit == false)
+                if (m_playerController.ReachedExit == false && !m_playerController.Cheated)
                 {
                     sceneCount -= 1;
                 }
