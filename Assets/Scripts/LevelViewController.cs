@@ -46,7 +46,9 @@ public class LevelViewController : MonoBehaviour
             momentumX += mouseSpeedX * 4;
         }
         momentumX = momentumX * 0.9;
-        levelTransform.eulerAngles += new Vector3(0f, (float)(momentumX), 0f);
+        if (levelTransform != null) {
+            levelTransform.eulerAngles += new Vector3(0f, (float)(momentumX), 0f);
+        }
         momentumY = momentumY * 0.9;
         mainCamera.orthographicSize += (float)momentumY;
         mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, 2.5f, 5.0f);

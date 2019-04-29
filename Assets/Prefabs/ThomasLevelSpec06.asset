@@ -44,11 +44,14 @@ MonoBehaviour:
   backtrackDamage: 1
   hazardDamage: 1
   walkDamage: 1
-  dashDamage: 3
+  dashDamage: 5
   diagDamage: 2
   playerStartWine: 8
   playerMaxWine: 8
   Spaces: 
+  available_abilities:
+  - Dash
+  - Diag
   Prefab_AbilityInventory: {fileID: 0}
   Background_RootPosition: {x: 0, y: 0, z: 0}
   data:

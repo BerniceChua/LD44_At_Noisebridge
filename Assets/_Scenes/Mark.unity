@@ -459,7 +459,7 @@ RectTransform:
   - {fileID: 2029299398}
   - {fileID: 1732350266}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1400,6 +1400,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 808036b14cbe2724292c61f65abfc765, type: 2}
   - {fileID: 11400000, guid: 35bc9a71d471cb44d958868999b1516e, type: 2}
   - {fileID: 11400000, guid: 7d20fade87abc1847b9ca1ed5ccad641, type: 2}
+  - {fileID: 11400000, guid: df6ad87880db35547a0481aa03308950, type: 2}
 --- !u!1 &873399224
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,6 +1769,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChaliceSlider
       objectReference: {fileID: 0}
+    - target: {fileID: 3245506748483409781, guid: 1bfacd60bbc081d4d89d84e66460f71d,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3245506748483409781, guid: 1bfacd60bbc081d4d89d84e66460f71d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3245506749169013531, guid: 1bfacd60bbc081d4d89d84e66460f71d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1871,16 +1882,6 @@ PrefabInstance:
     - target: {fileID: 3245506749169013531, guid: 1bfacd60bbc081d4d89d84e66460f71d,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3245506748483409781, guid: 1bfacd60bbc081d4d89d84e66460f71d,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3245506748483409781, guid: 1bfacd60bbc081d4d89d84e66460f71d,
-        type: 3}
-      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2564,7 +2565,7 @@ PrefabInstance:
     - target: {fileID: 8671290242670995563, guid: 0376b3889145c0049bcf4c915723b1ea,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8671290242670995563, guid: 0376b3889145c0049bcf4c915723b1ea,
         type: 3}
@@ -3190,7 +3191,7 @@ RectTransform:
   - {fileID: 1802930636}
   - {fileID: 1048366625}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3826,21 +3827,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6716582712749079858, guid: 3f88719786ccfdc438bc7fab99a457e7,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.54
-      objectReference: {fileID: 0}
     - target: {fileID: 6716582712749079861, guid: 3f88719786ccfdc438bc7fab99a457e7,
         type: 3}
       propertyPath: levelObject
       value: 
       objectReference: {fileID: 1371145808}
+    - target: {fileID: 6716582712749079858, guid: 3f88719786ccfdc438bc7fab99a457e7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.54
+      objectReference: {fileID: 0}
     - target: {fileID: 3999213417968678313, guid: 8e0a0f226d7b4254f8c7018cc7bd7152,
         type: 3}
       propertyPath: m_Name
       value: ares
       objectReference: {fileID: 0}
+    - target: {fileID: 4792939490287588926, guid: 8e0a0f226d7b4254f8c7018cc7bd7152,
+        type: 3}
+      propertyPath: levelObject
+      value: 
+      objectReference: {fileID: 1371145808}
     - target: {fileID: 3999213417968183689, guid: 8e0a0f226d7b4254f8c7018cc7bd7152,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -3891,10 +3897,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4792939490287588926, guid: 8e0a0f226d7b4254f8c7018cc7bd7152,
-        type: 3}
-      propertyPath: levelObject
-      value: 
-      objectReference: {fileID: 1371145808}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e0a0f226d7b4254f8c7018cc7bd7152, type: 3}

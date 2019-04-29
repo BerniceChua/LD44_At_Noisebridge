@@ -33,7 +33,7 @@ public class GameLoopManager : MonoBehaviour {
     [Tooltip("For scene loading, put the name of the scene for the game level")]
     [SerializeField] private string m_gameLevelScene;
 
-   
+    private string message;
 
     public Transform StaticParent;
 
@@ -52,20 +52,20 @@ public class GameLoopManager : MonoBehaviour {
     public IEnumerator GameLoop() {
 
         for (int sceneCount = 0; sceneCount < m_ArrayOfLevels.Length; sceneCount++) {
-           
+            //Debug.Log("sceneCount = " + sceneCount);
+            // As soon as the round begins playing let the players control the characters.
+            EnablePlayerControl();
+            m_playerController.Cheated = false;
             //Debug.Break();
             m_levelGenerator.GenerateLevel(StaticParent, m_ArrayOfLevels[sceneCount]);
-            // As soon as the round begins playing let the players control the characters.
-            m_playerController.Cheated = false;
-            m_playerController.ReachedExit = false;
+
             // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
             //yield return StartCoroutine(RoundStarting());
             //Debug.Log(m_playerController);
             //Debug.Break();
-            string message = CostMessage();
+            message = CostMessage();
             m_MessageText.text = message;
             m_endMessagePanel.SetActive(true);
-
 
             while (/*!Input.GetKey(KeyCode.Return) && */!Input.GetMouseButtonDown(0)) yield return null;
             m_StatsPanel.GetComponentInChildren<TextMeshProUGUI>().text = message;
@@ -76,12 +76,8 @@ public class GameLoopManager : MonoBehaviour {
             m_endMessagePanel.SetActive(false);
             // Clear the text from the screen.
             m_MessageText.text = string.Empty;
-            EnablePlayerControl();
-
             // As soon as the round begins playing, start the countdown timer.
-            while (m_playerController.ReachedExit == false && m_playerController.Cheated == false
-                && m_playerController.wine > 0)
-            {
+            while (m_playerController.ReachedExit == false && m_playerController.Cheated == false && m_playerController.wine > 0) {
                 //UpdateTimer();
                 // ... return on the next frame.
                 yield return null;
@@ -89,6 +85,7 @@ public class GameLoopManager : MonoBehaviour {
             // Stop players from moving.
             Debug.Log("disabled");
             DisablePlayerControl();
+            m_StatsPanel.SetActive(false);
             //yield return StartCoroutine(RoundPlaying());
 
             // Once execution has returned here, run the 'RoundEnding' coroutine, again don't return until it's finished.
@@ -98,26 +95,25 @@ public class GameLoopManager : MonoBehaviour {
             message = EndMessage();
             m_MessageText.text = message;
             // Wait for the specified length of time until yielding control back to the game loop.
+
             yield return null;
             //yield return StartCoroutine(RoundEnding());
 
             /// Re-enable restart/main menu/quit options when game ends.
-            m_menuPanel.SetActive(true);
+            //m_menuPanel.SetActive(true);
 
             //EndSoundSource.Stop();
             //Soundtrack.Play();
 
             /// After 'RoundEnding()' has finished, check if player wants to play again, or go to main menu, or quit.
             /// These are for either controller buttons or keyboard shortcuts, if the players don't use the UI buttons.
-            while (!Input.GetKey(KeyCode.Return))yield return null;
+            while (!Input.GetKey(KeyCode.Return)) yield return null;
+
             if (Input.GetKey(KeyCode.Return)) {
                 //if we died instead of reaching end, hold back sceneCount so we do the same scene again
-                if (m_playerController.ReachedExit == false)
-                {
+                if (m_playerController.ReachedExit == false && !m_playerController.Cheated) {
                     sceneCount -= 1;
-                }
-                else
-                {
+                } else {
                     m_StatsPanel.SetActive(false);
                 }
 
@@ -129,26 +125,24 @@ public class GameLoopManager : MonoBehaviour {
                 StaticParent = GameObject.Instantiate(levelObjectPrefab).transform;
                 DestroyCurrentLevel();
                 //SceneManager.LoadScene(m_gameLevelScene);
-                
-               
             } else if (Input.GetKey(KeyCode.Escape)) {
                 // Go to main menu.
                 SceneManager.LoadScene(m_introScene);
             } else if (Input.GetKey(KeyCode.Q)) {
                 // Quit the game.
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
 #else
-                Application.Quit();
+            Application.Quit();
 #endif
             }
-
         }
-
+        /// After the for-loop iterates through all the levels, 
+        /// re-enable restart / main menu / quit options when game ends.
+        m_menuPanel.SetActive(true);
     }
 
-    void DestroyCurrentLevel()
-    {
+    void DestroyCurrentLevel() {
 
         Destroy(pconToDestroy);
         Destroy(levelToDestroy);
@@ -221,8 +215,7 @@ public class GameLoopManager : MonoBehaviour {
         return message;
     }
 
-    private string CostMessage()
-    {
+    private string CostMessage() {
         CardControl ccontrol = GameObject.FindObjectOfType<CardControl>();
         string message = "COSTS!!" +
             "\nBasic Move: " + m_playerController.walkDamage +
@@ -234,14 +227,13 @@ public class GameLoopManager : MonoBehaviour {
             "\n\nDAMAGE!!" + 
             "\nBackTrack: " + m_playerController.backtrackDamage +
             "\nHazards: " + m_playerController.hazardDamage;
-        
-    
 
         m_endMessagePanel.SetActive(true);
 
         return message;
     }
-    // This function is used to turn all the player-characters back on and reset their positions and properties.
+
+    /// This function is used to turn all the player-characters back on and reset their positions and properties.
     private void ResetAllPlayers() {
         //for (int i = 0; i < m_PlayersArray.Length; i++) {
         //    m_PlayersArray[i].Reset();
