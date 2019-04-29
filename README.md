@@ -15,6 +15,7 @@ Bernice Anne W. Chua (programmer, UX/UI)
 - https://ldjam.com/users/bernice-anne-w-chua/
 - https://www.bernicechua.com/
 - https://gitlab.com/BerniceChua
+- https://github.com/BerniceChua
 - https://linkedin.com/in/bernicechua415/
 - https://twitter.com/ChuaBernice
 - https://www.aaronswartzday.org/bernice-chua/
