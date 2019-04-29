@@ -505,9 +505,17 @@ MonoBehaviour:
   levelSize: 7
   myspace: {fileID: 0}
   levelObject: {fileID: 430850660}
+  backTrackPrefab: {fileID: 0}
   wine: 0
   grapes: 0
   wineLoss: 0
+  grapeHealAmount: 0
+  wineHealAmount: 0
+  backtrackDamage: 0
+  hazardDamage: 0
+  walkDamage: 0
+  playerStartWine: 0
+  playerMaxWine: 0
 --- !u!136 &271618705
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1105,7 +1113,9 @@ MonoBehaviour:
   StaticParent: {fileID: 430850660}
   m_levelGenerator: {fileID: 787030379}
   m_ArrayOfLevels:
-  - {fileID: 11400000, guid: e2a4ce9971152924091be1fe90341bdc, type: 2}
+  - {fileID: 11400000, guid: cb43dacff2da07a48a4c8dfe9dc0b498, type: 2}
+  - {fileID: 11400000, guid: 5de79408453c22a44a928044bc667afc, type: 2}
+  - {fileID: 11400000, guid: 808036b14cbe2724292c61f65abfc765, type: 2}
 --- !u!114 &787030379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1611,6 +1621,8 @@ MonoBehaviour:
   - {fileID: 36895361}
   levelObject: {fileID: 430850660}
   player: {fileID: 271618704}
+  dashLoss: 0
+  diagLoss: 0
   tweenUse: 0
   tweenLen: 0.15
   hudtext: {fileID: 2075290918}

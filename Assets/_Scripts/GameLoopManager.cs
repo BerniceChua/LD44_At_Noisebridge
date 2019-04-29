@@ -72,9 +72,12 @@ public class GameLoopManager : MonoBehaviour {
 
             /// After 'RoundEnding()' has finished, check if player wants to play again, or go to main menu, or quit.
             /// These are for either controller buttons or keyboard shortcuts, if the players don't use the UI buttons.
+            while (!Input.GetKey(KeyCode.Return))yield return null;
             if (Input.GetKey(KeyCode.Return)) {
                 // Restart the level.
-                SceneManager.LoadScene(m_gameLevelScene);
+                DestroyCurrentLevel();
+                //SceneManager.LoadScene(m_gameLevelScene);
+                
             } else if (Input.GetKey(KeyCode.Escape)) {
                 // Go to main menu.
                 SceneManager.LoadScene(m_introScene);
@@ -89,6 +92,16 @@ public class GameLoopManager : MonoBehaviour {
 
         }
 
+    }
+
+    void DestroyCurrentLevel()
+    {
+        
+        foreach(Transform levelChild in GameObject.Find("LevelObject").transform)
+        {
+            Destroy(levelChild.gameObject);
+            
+        }
     }
 
     private IEnumerator RoundStarting() {
@@ -108,7 +121,7 @@ public class GameLoopManager : MonoBehaviour {
         m_MessageText.text = string.Empty;
 
         // As soon as the round begins playing, start the countdown timer.
-        while (m_playerController.ReachedExit == false) {
+        while (m_playerController.ReachedExit == false && m_playerController.Cheated == false) {
             //UpdateTimer();
             // ... return on the next frame.
             yield return null;
@@ -138,10 +151,10 @@ public class GameLoopManager : MonoBehaviour {
         string message = "";
 
         // If there is a casualty then change the message to reflect that.
-        if (m_playerController.ReachedExit) {
-            message = "You've reached your goal!!";
+        if (m_playerController.ReachedExit || m_playerController.Cheated) {
+            message = "You've reached your goal!! Press Enter to Continue";
         } else {
-            message = "You've ran out of moves!!";
+            message = "You've ran out of wine!! Press Enter to Retry";
         }
 
         // Add some line breaks after the initial message.

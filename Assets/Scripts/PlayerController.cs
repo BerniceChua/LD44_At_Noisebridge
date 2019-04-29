@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform myspace;
 
+    public bool Cheated;
+
     [SerializeField]
     Transform levelObject;
 
@@ -34,7 +36,14 @@ public class PlayerController : MonoBehaviour
     public int playerStartWine;
     public int playerMaxWine;
 
-
+    void Update()
+    {
+        if (Input.GetKeyDown("0"))
+        {
+            Debug.Log("cheated");
+            Cheated = true;
+        }
+    }
 
     public Transform GetCurrentSpaceTransform()
     {
@@ -158,6 +167,7 @@ public class PlayerController : MonoBehaviour
 
     /// Used during the phases of the game where the player shouldn't be able to control their characters.
     public void DisableControl() {
+        transform.parent = null;
         this.enabled = false;
         //m_CanvasGameObject.SetActive(false);
 
