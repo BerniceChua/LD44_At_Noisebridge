@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
         myspace = spaceobj;
         Debug.Log(myspace);
         Debug.Log(spaceobj.GetComponent<MoveSpace>().hasPickup);
-        transform.position = new Vector3(spaceobj.position.x, .5f, spaceobj.position.z);
+        transform.position = new Vector3(spaceobj.position.x, .8f, spaceobj.position.z);
         //Debug.Break();
         Debug.Log(spaceobj);
         transform.SetParent(spaceobj);

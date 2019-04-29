@@ -171,7 +171,7 @@ public class CardControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hudtext.GetComponent<Text>().text = "Grapes="+player.grapes+"  Wine="+player.wine+"  PlX="+player.posX+"  PlY="+player.posY;
+        hudtext.GetComponent<Text>().text = "Grapes="+player.grapes+"  Wine="+player.wine+"/"+player.playerMaxWine  + "  PlX="+player.posX+"  PlY="+player.posY;
         if (tweenUse)
         {
             tweenPos += Time.deltaTime;

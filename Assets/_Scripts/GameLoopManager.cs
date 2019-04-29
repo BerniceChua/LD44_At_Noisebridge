@@ -11,7 +11,7 @@ public class GameLoopManager : MonoBehaviour {
     [SerializeField] public float m_EndDelay = 3f;
 
     [SerializeField] private GameObject m_endMessagePanel;     // Reference to the overlay Panel that contains Text to display result text, etc.
-    public Text m_MessageText;                  // Reference to the overlay Text to display result text, etc.
+    public TextMeshProUGUI m_MessageText;                  // Reference to the overlay Text to display result text, etc.
 
     public GameObject playerPrefab, levelObjectPrefab;
     [SerializeField] public PlayerController m_playerController;
@@ -54,23 +54,32 @@ public class GameLoopManager : MonoBehaviour {
     public IEnumerator GameLoop() {
 
         for (int sceneCount = 0; sceneCount < m_ArrayOfLevels.Length; sceneCount++) {
-            // As soon as the round begins playing let the players control the characters.
-            EnablePlayerControl();
-            m_playerController.Cheated = false;
-            m_playerController.ReachedExit = false;
+           
             //Debug.Break();
             m_levelGenerator.GenerateLevel(StaticParent, m_ArrayOfLevels[sceneCount]);
-
+            // As soon as the round begins playing let the players control the characters.
+            m_playerController.Cheated = false;
+            m_playerController.ReachedExit = false;
             // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
             //yield return StartCoroutine(RoundStarting());
             //Debug.Log(m_playerController);
             //Debug.Break();
+            string message = CostMessage();
+            m_MessageText.text = message;
+            m_endMessagePanel.SetActive(true);
+
+
+            while (/*!Input.GetKey(KeyCode.Return) && */!Input.GetMouseButtonDown(0)) yield return null;
+            m_StatsPanel.GetComponentInChildren<TextMeshProUGUI>().text = message;
+            m_StatsPanel.SetActive(true);
 
             // Once the 'RoundStarting' coroutine is finished, run the 'RoundPlaying' coroutine but don't return until it's finished.
             m_menuPanel.SetActive(false);
             m_endMessagePanel.SetActive(false);
             // Clear the text from the screen.
             m_MessageText.text = string.Empty;
+            EnablePlayerControl();
+
             // As soon as the round begins playing, start the countdown timer.
             while (m_playerController.ReachedExit == false && m_playerController.Cheated == false
                 && m_playerController.wine > 0)
@@ -82,14 +91,13 @@ public class GameLoopManager : MonoBehaviour {
             // Stop players from moving.
             Debug.Log("disabled");
             DisablePlayerControl();
-            m_StatsPanel.SetActive(false);
             //yield return StartCoroutine(RoundPlaying());
 
             // Once execution has returned here, run the 'RoundEnding' coroutine, again don't return until it's finished.
             // Stop players from moving.
             DisablePlayerControl();
             /// Get a message based on the scores and whether or not all the characters survived and display it.
-            string message = EndMessage();
+            message = EndMessage();
             m_MessageText.text = message;
             // Wait for the specified length of time until yielding control back to the game loop.
             yield return null;
@@ -111,6 +119,11 @@ public class GameLoopManager : MonoBehaviour {
                 {
                     sceneCount -= 1;
                 }
+                else
+                {
+                    m_StatsPanel.SetActive(false);
+                }
+
                 // Restart the level.
                 pconToDestroy = m_playerController.gameObject;
                 levelToDestroy = StaticParent.gameObject;
@@ -211,6 +224,26 @@ public class GameLoopManager : MonoBehaviour {
         return message;
     }
 
+    private string CostMessage()
+    {
+        CardControl ccontrol = GameObject.FindObjectOfType<CardControl>();
+        string message = "COSTS!!" +
+            "\nBasic Move: " + m_playerController.walkDamage +
+            "\nDiagonal Move: " + ccontrol.diagLoss +
+            "\nDash Move: " + ccontrol.dashLoss +
+            "\n\nVALUES!!" +
+            "\nChalice: " + m_playerController.wineHealAmount +
+            "\nGrapes: " + m_playerController.grapeHealAmount + 
+            "\n\nDAMAGE!!" + 
+            "\nBackTrack: " + m_playerController.backtrackDamage +
+            "\nHazards: " + m_playerController.hazardDamage;
+        
+    
+
+        m_endMessagePanel.SetActive(true);
+
+        return message;
+    }
     // This function is used to turn all the player-characters back on and reset their positions and properties.
     private void ResetAllPlayers() {
         //for (int i = 0; i < m_PlayersArray.Length; i++) {
