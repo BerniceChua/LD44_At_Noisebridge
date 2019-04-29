@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController2 : MonoBehaviour
 {
 
     [SerializeField]
@@ -12,10 +12,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform myspace;
 
-    public bool Cheated;
-
-    [SerializeField]
-    Transform levelObject;
+    //[SerializeField] Transform levelObject;
+    Transform levelObject { get { return GameObject.FindObjectOfType<LevelObject>().transform; } set { levelObject = value; } }
 
     [SerializeField]
     GameObject backTrackPrefab;
@@ -36,14 +34,7 @@ public class PlayerController : MonoBehaviour
     public int playerStartWine;
     public int playerMaxWine;
 
-    void Update()
-    {
-        if (Input.GetKeyDown("0"))
-        {
-            Debug.Log("cheated");
-            Cheated = true;
-        }
-    }
+
 
     public Transform GetCurrentSpaceTransform()
     {
@@ -62,6 +53,7 @@ public class PlayerController : MonoBehaviour
         transform.SetParent(spaceobj);
         posX = x;
         posY = y;
+        //wine -= wineLoss;
         // 12:00 - the x and y are the same
         // 12:10 - myspace points to a seemingly unrelated object
         // 12:18 - it is not because the number of children has changed because of subobjects
@@ -116,9 +108,7 @@ public class PlayerController : MonoBehaviour
         //check if we should add backtrack hazard
         if (ps != null)
         {
-            wine -= spaceobj.GetComponent<MoveSpace>().wineLoss;
-
-            //wine -= ps.GetComponent<MoveSpace>().wineLoss;
+            wine -= ps.GetComponent<MoveSpace>().wineLoss;
             //if no pickup, create backtrack hazard
             if (!ps.GetComponent<MoveSpace>().hasPickup)
             {
@@ -167,7 +157,6 @@ public class PlayerController : MonoBehaviour
 
     /// Used during the phases of the game where the player shouldn't be able to control their characters.
     public void DisableControl() {
-        transform.parent = null;
         this.enabled = false;
         //m_CanvasGameObject.SetActive(false);
 
