@@ -110,7 +110,7 @@ public class CardControl : MonoBehaviour
 
         // highlight by type
         //if (at == AbilityType.Basic)
-        {
+        if (false) {
             int[,] offsets = new int[,] { { -1, 0 }, { 0, -1 }, { 1, 0 }, { 0, 1 } };
             Debug.Log(player.posX + ","+player.posY);
             for (int i=0; i<4; i++)
