@@ -106,6 +106,7 @@ public class generate_level : MonoBehaviour
             }
         }
         pcon.MoveToSpace(pStartX, pStartY);
+        pcon.ResetExitStatus();
     }
     
     public void InstantiateSpawnerContainer (GameObject Prefab_Container, Transform StaticParent, Transform DynamicParent)

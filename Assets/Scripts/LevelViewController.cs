@@ -39,7 +39,10 @@ public class LevelViewController : MonoBehaviour
             GameObject.FindObjectOfType<LevelViewController>().ClearSuggestedMoves();
             mouseSpeedX = Input.GetAxis("Mouse X");
             mouseSpeedY = Input.GetAxis("Mouse Y");
-            momentumY -= mouseSpeedY / 8f;
+            if (mouseSpeedY > 0.3) // dead zone
+                momentumY -= (mouseSpeedY - 0.3) / 8f;
+            if (mouseSpeedY < -0.3) // dead zone
+                momentumY -= (mouseSpeedY + 0.3) / 8f;
             momentumX += mouseSpeedX * 4;
         }
         momentumX = momentumX * 0.9;

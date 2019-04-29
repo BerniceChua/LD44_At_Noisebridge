@@ -33,9 +33,7 @@ public class GameLoopManager : MonoBehaviour {
     [Tooltip("For scene loading, put the name of the scene for the game level")]
     [SerializeField] private string m_gameLevelScene;
 
-    public AudioSource EndSoundSource;
-    public AudioSource Soundtrack;
-    public bool PlayingEndSound;
+   
 
     public Transform StaticParent;
 
@@ -105,7 +103,6 @@ public class GameLoopManager : MonoBehaviour {
 
             /// Re-enable restart/main menu/quit options when game ends.
             m_menuPanel.SetActive(true);
-            PlayingEndSound = false;
 
             //EndSoundSource.Stop();
             //Soundtrack.Play();
