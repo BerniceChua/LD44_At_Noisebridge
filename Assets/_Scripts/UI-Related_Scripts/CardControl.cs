@@ -79,24 +79,24 @@ public class CardControl : MonoBehaviour
         if (dirx > 0)
         {
             // right
-            return (space0.moveSpaceType == SpaceType.WallRight || space1.moveSpaceType == SpaceType.WallLeft);
+            return (space0.moveSpaceType == SpaceType.WallRight || space1.moveSpaceType == SpaceType.WallLeft || space1.moveSpaceType == SpaceType.WallTopLeft);
         }
         if (dirx < 0)
         {
             // left
-            return (space0.moveSpaceType == SpaceType.WallLeft || space1.moveSpaceType == SpaceType.WallRight);
+            return (space0.moveSpaceType == SpaceType.WallLeft || space1.moveSpaceType == SpaceType.WallRight || space0.moveSpaceType == SpaceType.WallTopLeft);
         }
         if (diry > 0)
         {
             //2019-04-28 3:08 PM - if I flip down/up it fixes one bug and surfaces a different one.
 
             // down
-            return (space0.moveSpaceType == SpaceType.WallTop || space1.moveSpaceType == SpaceType.WallBottom);
+            return (space0.moveSpaceType == SpaceType.WallTop || space1.moveSpaceType == SpaceType.WallBottom || space0.moveSpaceType == SpaceType.WallTopLeft);
         }
         if (diry < 0)
         {
             // up
-            return (space0.moveSpaceType == SpaceType.WallBottom || space1.moveSpaceType == SpaceType.WallTop);
+            return (space0.moveSpaceType == SpaceType.WallBottom || space1.moveSpaceType == SpaceType.WallTop || space1.moveSpaceType == SpaceType.WallTopLeft);
         }
         return false;
     }
