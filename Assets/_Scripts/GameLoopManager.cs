@@ -52,8 +52,8 @@ public class GameLoopManager : MonoBehaviour {
         for (int sceneCount = 0; sceneCount < m_ArrayOfLevels.Length; sceneCount++) {
             //Debug.Log("sceneCount = " + sceneCount);
             //if (sceneCount > m_ArrayOfLevels.Length) {
-                /// Re-enable restart/main menu/quit options when game ends.
-                //m_menuPanel.SetActive(true);
+            //    // Re - enable restart / main menu / quit options when game ends.
+            //    m_menuPanel.SetActive(true);
             //} else {
                 // As soon as the round begins playing let the players control the characters.
                 EnablePlayerControl();
@@ -125,7 +125,9 @@ public class GameLoopManager : MonoBehaviour {
 #endif
                 }
             //}
-        }
+            }
+            // Re - enable restart / main menu / quit options when game ends.
+            m_menuPanel.SetActive(true);
     }
 
     void DestroyCurrentLevel()
