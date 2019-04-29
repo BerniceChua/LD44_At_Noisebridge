@@ -31,7 +31,7 @@ public class CardControl : MonoBehaviour
         SyncButtons();
     }
 
-    void SyncButtons()
+    public void SyncButtons()
     {
         m_dest = new Vector2[m_button.Length];
         for (int i=0; i<m_button.Length; i++)

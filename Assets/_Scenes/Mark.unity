@@ -924,6 +924,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelSpecification: {fileID: 11400000, guid: cb43dacff2da07a48a4c8dfe9dc0b498, type: 2}
+  allAbilityButtons:
+  - {fileID: 2102596003}
+  - {fileID: 987674691}
+  - {fileID: 1310794062}
 --- !u!114 &870659069
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -49,6 +49,8 @@ MonoBehaviour:
   playerStartWine: 8
   playerMaxWine: 8
   Spaces: 
+  available_abilities:
+  - Diag
   Prefab_AbilityInventory: {fileID: 0}
   Background_RootPosition: {x: 0, y: 0, z: 0}
   data:

@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class generate_level : MonoBehaviour 
 {
     
     public level_specification LevelSpecification;
-    
+    public List<GameObject> allAbilityButtons;
+
     public void GenerateLevel (Transform StaticParent, level_specification LevelSpecification)
     {
         float centerX = LevelSpecification.sizeX / 2f;
@@ -16,8 +18,26 @@ public class generate_level : MonoBehaviour
         PlayerController pcon = GameObject.FindObjectOfType<GameLoopManager>().m_playerController;
         pcon.levelObject = StaticParent;
         GameObject.FindObjectOfType<LevelViewController>().levelTransform = StaticParent;
-        GameObject.FindObjectOfType<CardControl>().levelObject = StaticParent;
-        GameObject.FindObjectOfType<CardControl>().player = pcon;
+        CardControl cardControl = GameObject.FindObjectOfType<CardControl>();
+        cardControl.levelObject = StaticParent;
+        cardControl.player = pcon;
+        //populate available ability buttons for the level
+
+        foreach(Button b in cardControl.m_button)
+        {
+            b.gameObject.SetActive(false);
+        }
+        cardControl.m_button = new Button[LevelSpecification.available_abilities.Length];
+        string buttonName = "";
+        for(int i = 0; i < cardControl.m_button.Length; i++)
+        {
+            buttonName = LevelSpecification.available_abilities[i];
+            GameObject butt = allAbilityButtons.Find(x => x.name == buttonName);
+            Debug.Log(butt);
+            cardControl.m_button[i] = butt.GetComponent<Button>();
+            cardControl.m_button[i].gameObject.SetActive(true);
+        }
+        cardControl.SyncButtons();
 
         pcon.grapeHealAmount = LevelSpecification.grapeHealAmount;
         pcon.wineHealAmount = LevelSpecification.wineHealAmount;
