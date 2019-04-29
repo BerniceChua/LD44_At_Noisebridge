@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
                     grapes = 0;
                     // it's a berry simple formula
                 }
-                else if (pickupobj.name.Contains("BackTrack"))
+                else if (pickupobj.name.Contains("fire"))
                 {
                     wine -= backtrackDamage;
                 }

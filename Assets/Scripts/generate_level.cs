@@ -69,6 +69,11 @@ public class generate_level : MonoBehaviour
                     }
                     space.GetComponent<MoveSpace>().hasPickup = true;
                 }
+                if (pickuptype == 5)
+                {
+                    pStartX = space.GetComponent<MoveSpace>().posX;
+                    pStartY = space.GetComponent<MoveSpace>().posY;
+                }
             }
         }
         pcon.MoveToSpace(pStartX, pStartY);
