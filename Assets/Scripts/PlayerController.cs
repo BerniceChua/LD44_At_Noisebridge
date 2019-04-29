@@ -51,6 +51,39 @@ public class PlayerController : MonoBehaviour
         return levelObject.GetChild((levelSize * posX) + posY);
     }
 
+    public void sfx(int id)
+    {
+        GameObject.Find("SoundStuff").GetComponent<SoundController>().cueSFXRandom(id);
+    }
+    public void sfxWalk()
+    {
+        sfx(0);
+    }
+    public void sfxGrape()
+    {
+        sfx(1);
+    }
+    public void sfxHazard()
+    {
+        sfx(2);
+    }
+    public void sfxPress()
+    {
+        sfx(3);
+    }
+    public void sfxFire()
+    {
+        sfx(4);
+    }
+    public void sfxWine()
+    {
+        sfx(5);
+    }
+    public void sfxExit()
+    {
+        sfx(6);
+    }
+
     //move to a space, given it's map coords
     public void MoveToSpace(int x, int y, Transform ps = null)
     {
@@ -88,14 +121,17 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("has pickup!" + pickupobj.name);
 
                 if (pickupobj.name.Contains("Grape")) {
+                    sfxGrape();
                     grapes += grapeHealAmount;
                     Destroy(pickupobj);
                     InstantiateBackTrackHazard(ps);
                 } else if (pickupobj.name.Contains("Hazard")) {
+                    sfxHazard();
                     spaceobj.GetComponent<MoveSpace>().hasPickup = true;
 
                     wine -= hazardDamage;
                 } else if (pickupobj.name.Contains("Press")) {
+                    sfxPress();
                     spaceobj.GetComponent<MoveSpace>().hasPickup = true;
 
                     wine += grapes;
@@ -103,16 +139,23 @@ public class PlayerController : MonoBehaviour
                     grapes = 0;
                     // it's a berry simple formula
                 } else if (pickupobj.name.Contains("fire")) {
+                    sfxFire();
                     wine -= backtrackDamage;
                 } else if (pickupobj.name.Contains("Wine")) {
+                    sfxWine();
                     wine += wineHealAmount;
                     wine = Mathf.Clamp(wine, 0, playerMaxWine + 1);
 
                     Destroy(pickupobj);
                     InstantiateBackTrackHazard(ps);
                 } else if (pickupobj.name.Contains("dionysus")) {
+                    sfxExit();
                     /// This is the 'success' condition, to exit the game loop. ^_^
                     m_reachedExit = true;
+                }
+                else
+                {
+                    sfxWalk();
                 }
             }
 
