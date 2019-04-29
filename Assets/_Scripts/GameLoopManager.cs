@@ -252,6 +252,7 @@ public class GameLoopManager : MonoBehaviour {
     /// UI Button to restart the level.
     /// </summary>
     public void UIButtonRestartGame() {
+        m_menuPanel.SetActive(false);
         SceneManager.LoadScene(m_gameLevelScene);
     }
 
