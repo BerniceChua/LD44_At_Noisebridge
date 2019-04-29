@@ -43,7 +43,6 @@ public class SoundController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
         if (Input.GetKeyDown("1"))
         {
             cueMusic(0);

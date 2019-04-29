@@ -13,7 +13,11 @@ public class generate_level : MonoBehaviour
         float centerZ = LevelSpecification.sizeZ / 2f;
 
         int pStartX = 0, pStartY = 0;
-        PlayerController pcon = GameObject.FindObjectOfType<PlayerController>();
+        PlayerController pcon = GameObject.FindObjectOfType<GameLoopManager>().m_playerController;
+        pcon.levelObject = StaticParent;
+        GameObject.FindObjectOfType<LevelViewController>().levelTransform = StaticParent;
+        GameObject.FindObjectOfType<CardControl>().levelObject = StaticParent;
+        GameObject.FindObjectOfType<CardControl>().player = pcon;
 
         pcon.grapeHealAmount = LevelSpecification.grapeHealAmount;
         pcon.wineHealAmount = LevelSpecification.wineHealAmount;

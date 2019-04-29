@@ -11,9 +11,9 @@ public class CardControl : MonoBehaviour
     private Vector2[] m_dest;
 
     [SerializeField]
-    Transform levelObject;
+    public Transform levelObject;
     [SerializeField]
-    PlayerController player;
+    public PlayerController player;
 
     int levelSize = 7;
 

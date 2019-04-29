@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public bool Cheated;
 
     [SerializeField]
-    Transform levelObject;
+    public Transform levelObject;
 
     [SerializeField]
     GameObject backTrackPrefab;
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private bool m_reachedExit = false;
     public bool ReachedExit {
         get { return m_reachedExit; }
+        set { m_reachedExit = value; }
     }
 
     //variable per-level properties
@@ -57,9 +58,13 @@ public class PlayerController : MonoBehaviour
         Transform spaceobj = levelObject.GetChild((levelSize * x) + y);
         Debug.Log(levelSize * x + y);
         myspace = spaceobj;
+        Debug.Log(myspace);
         Debug.Log(spaceobj.GetComponent<MoveSpace>().hasPickup);
         transform.position = new Vector3(spaceobj.position.x, .5f, spaceobj.position.z);
+        //Debug.Break();
+        Debug.Log(spaceobj);
         transform.SetParent(spaceobj);
+        //Debug.Break();
         posX = x;
         posY = y;
         // 12:00 - the x and y are the same
@@ -143,6 +148,13 @@ public class PlayerController : MonoBehaviour
             }
         }
         }
+        Debug.Log("end of movetospace"+spaceobj);
+    }
+
+    void OnDestroy()
+    {
+        Debug.Log(UnityEngine.StackTraceUtility.ExtractStackTrace());
+        //Debug.Break();
     }
 
     public void InstantiateBackTrackHazard(Transform playerSpace)
@@ -167,7 +179,7 @@ public class PlayerController : MonoBehaviour
 
     /// Used during the phases of the game where the player shouldn't be able to control their characters.
     public void DisableControl() {
-        transform.parent = null;
+        
         this.enabled = false;
         //m_CanvasGameObject.SetActive(false);
 

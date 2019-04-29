@@ -7,7 +7,7 @@ public class LevelViewController : MonoBehaviour
     float mouseSpeedX, mouseSpeedY;
 
     [SerializeField]
-    Transform levelTransform;
+    public Transform levelTransform;
 
     [SerializeField]
     Camera mainCamera;

@@ -13,11 +13,6 @@ public class Ability : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
 
 public enum AbilityType

@@ -13,7 +13,9 @@ public class GameLoopManager : MonoBehaviour {
     [SerializeField] private GameObject m_endMessagePanel;     // Reference to the overlay Panel that contains Text to display result text, etc.
     public Text m_MessageText;                  // Reference to the overlay Text to display result text, etc.
 
+    public GameObject playerPrefab, levelObjectPrefab;
     [SerializeField] public PlayerController m_playerController;
+    GameObject pconToDestroy, levelToDestroy;
 
     private WaitForSeconds m_StartWait;         /// Used to have a delay whilst the round starts.
     private WaitForSeconds m_EndWait;           /// Used to have a delay whilst the round or game ends.
@@ -52,16 +54,46 @@ public class GameLoopManager : MonoBehaviour {
     public IEnumerator GameLoop() {
 
         for (int sceneCount = 0; sceneCount < m_ArrayOfLevels.Length; sceneCount++) {
+            // As soon as the round begins playing let the players control the characters.
+            EnablePlayerControl();
+            m_playerController.Cheated = false;
+            m_playerController.ReachedExit = false;
+            //Debug.Break();
             m_levelGenerator.GenerateLevel(StaticParent, m_ArrayOfLevels[sceneCount]);
 
             // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
-            yield return StartCoroutine(RoundStarting());
+            //yield return StartCoroutine(RoundStarting());
+            //Debug.Log(m_playerController);
+            //Debug.Break();
 
             // Once the 'RoundStarting' coroutine is finished, run the 'RoundPlaying' coroutine but don't return until it's finished.
-            yield return StartCoroutine(RoundPlaying());
+            m_menuPanel.SetActive(false);
+            m_endMessagePanel.SetActive(false);
+            // Clear the text from the screen.
+            m_MessageText.text = string.Empty;
+            // As soon as the round begins playing, start the countdown timer.
+            while (m_playerController.ReachedExit == false && m_playerController.Cheated == false
+                && m_playerController.wine > 0)
+            {
+                //UpdateTimer();
+                // ... return on the next frame.
+                yield return null;
+            }
+            // Stop players from moving.
+            Debug.Log("disabled");
+            DisablePlayerControl();
+            m_StatsPanel.SetActive(false);
+            //yield return StartCoroutine(RoundPlaying());
 
             // Once execution has returned here, run the 'RoundEnding' coroutine, again don't return until it's finished.
-            yield return StartCoroutine(RoundEnding());
+            // Stop players from moving.
+            DisablePlayerControl();
+            /// Get a message based on the scores and whether or not all the characters survived and display it.
+            string message = EndMessage();
+            m_MessageText.text = message;
+            // Wait for the specified length of time until yielding control back to the game loop.
+            yield return null;
+            //yield return StartCoroutine(RoundEnding());
 
             /// Re-enable restart/main menu/quit options when game ends.
             m_menuPanel.SetActive(true);
@@ -74,10 +106,21 @@ public class GameLoopManager : MonoBehaviour {
             /// These are for either controller buttons or keyboard shortcuts, if the players don't use the UI buttons.
             while (!Input.GetKey(KeyCode.Return))yield return null;
             if (Input.GetKey(KeyCode.Return)) {
+                //if we died instead of reaching end, hold back sceneCount so we do the same scene again
+                if (m_playerController.ReachedExit == false)
+                {
+                    sceneCount -= 1;
+                }
                 // Restart the level.
+                pconToDestroy = m_playerController.gameObject;
+                levelToDestroy = StaticParent.gameObject;
+
+                m_playerController = GameObject.Instantiate(playerPrefab).GetComponent<PlayerController>();
+                StaticParent = GameObject.Instantiate(levelObjectPrefab).transform;
                 DestroyCurrentLevel();
                 //SceneManager.LoadScene(m_gameLevelScene);
                 
+               
             } else if (Input.GetKey(KeyCode.Escape)) {
                 // Go to main menu.
                 SceneManager.LoadScene(m_introScene);
@@ -96,26 +139,27 @@ public class GameLoopManager : MonoBehaviour {
 
     void DestroyCurrentLevel()
     {
-        
-        foreach(Transform levelChild in GameObject.Find("LevelObject").transform)
-        {
-            Destroy(levelChild.gameObject);
-            
-        }
+
+        Destroy(pconToDestroy);
+        Destroy(levelToDestroy);
     }
 
     private IEnumerator RoundStarting() {
         // Wait for the specified length of time until yielding control back to the game loop.
-        yield return m_StartWait;
+        Debug.Log(m_playerController);
+        //Debug.Break();
+        yield return null;
     }
 
     private IEnumerator RoundPlaying() {
 
+        Debug.Log(m_playerController);
+
+        //Debug.Break();
         /// Disable restart/main menu/quit options when game starts.
         m_menuPanel.SetActive(false);
-
-        // As soon as the round begins playing let the players control the characters.
-        EnablePlayerControl();
+        
+        
 
         // Clear the text from the screen.
         m_MessageText.text = string.Empty;
@@ -124,9 +168,11 @@ public class GameLoopManager : MonoBehaviour {
         while (m_playerController.ReachedExit == false && m_playerController.Cheated == false) {
             //UpdateTimer();
             // ... return on the next frame.
+            Debug.Log("player" + m_playerController);
             yield return null;
         }
         // Stop players from moving.
+        Debug.Log("disabled");
         DisablePlayerControl();
 
         m_StatsPanel.SetActive(false);
@@ -143,7 +189,7 @@ public class GameLoopManager : MonoBehaviour {
         m_MessageText.text = message;
 
         // Wait for the specified length of time until yielding control back to the game loop.
-        yield return m_EndWait;
+        yield return null;
     }
 
     private string EndMessage() {
@@ -152,13 +198,13 @@ public class GameLoopManager : MonoBehaviour {
 
         // If there is a casualty then change the message to reflect that.
         if (m_playerController.ReachedExit || m_playerController.Cheated) {
-            message = "You've reached your goal!! Press Enter to Continue";
+            message = "You've reached your goal!! \nPress Enter to Continue";
         } else {
-            message = "You've ran out of wine!! Press Enter to Retry";
+            message = "You've ran out of wine!! \nPress Enter to Retry";
         }
 
         // Add some line breaks after the initial message.
-        message += "\n\n\n\n";
+        //message += "\n\n\n\n";
 
         m_endMessagePanel.SetActive(true);
 
