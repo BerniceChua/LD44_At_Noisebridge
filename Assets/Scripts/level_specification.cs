@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu (menuName="Level Specification")]
 public class level_specification : ScriptableObject {
@@ -27,6 +28,8 @@ public class level_specification : ScriptableObject {
     public int playerMaxWine;
 
     public SpaceType[] Spaces;
+
+    public string[] available_abilities;
 
     public GameObject Prefab_AbilityInventory;
         

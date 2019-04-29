@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4807362015570434950
+--- !u!1 &3999213417968678313
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4807362015570434949}
-  - component: {fileID: 4807362015570434954}
-  - component: {fileID: 4807362015570434955}
-  - component: {fileID: 4807362015570434948}
-  - component: {fileID: 5178551297755391670}
+  - component: {fileID: 3999213417968183689}
+  - component: {fileID: 3999213417965316521}
+  - component: {fileID: 3999213417966414697}
+  - component: {fileID: 4792939490287588926}
   m_Layer: 0
-  m_Name: Basic
-  m_TagString: movespace
+  m_Name: ares
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4807362015570434949
+--- !u!4 &3999213417968183689
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4807362015570434950}
+  m_GameObject: {fileID: 3999213417968678313}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: 0}
-  m_LocalScale: {x: 1, y: 0.3, z: 1}
+  m_LocalPosition: {x: 0.54, y: 0.58, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4807362015570434954
+--- !u!33 &3999213417965316521
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4807362015570434950}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4807362015570434955
+  m_GameObject: {fileID: 3999213417968678313}
+  m_Mesh: {fileID: 4300000, guid: 0b377364f7ae13e4b9d23426e6830d4d, type: 3}
+--- !u!23 &3999213417966414697
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4807362015570434950}
+  m_GameObject: {fileID: 3999213417968678313}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -59,7 +58,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d05c36b413f224b46b2e738be1773519, type: 3}
+  - {fileID: 2100000, guid: 0b377364f7ae13e4b9d23426e6830d4d, type: 3}
+  - {fileID: 2100002, guid: 0b377364f7ae13e4b9d23426e6830d4d, type: 3}
+  - {fileID: 2100004, guid: 0b377364f7ae13e4b9d23426e6830d4d, type: 3}
+  - {fileID: 2100006, guid: 0b377364f7ae13e4b9d23426e6830d4d, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,41 +81,34 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4807362015570434948
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4807362015570434950}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5178551297755391670
+--- !u!114 &4792939490287588926
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4807362015570434950}
+  m_GameObject: {fileID: 3999213417968678313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 809dcc03abad0e94c99ccc64cfeed7e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4109f261ab042224db5a4b37d955dd0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTurnedOn: 0
-  hasSuggestedMove: 0
-  hasPickup: 0
-  wineLoss: 0
-  moveSpaceType: 0
   camera: {fileID: 0}
-  mat0: {fileID: 2100000, guid: d05c36b413f224b46b2e738be1773519, type: 3}
-  mat1: {fileID: 2100000, guid: 196a6980bea265b4d8e8328b00d49ce5, type: 2}
-  backTrackPrefab: {fileID: 9030668785536035811, guid: da49fb4cdf955144a9266feb3b59188c,
-    type: 3}
-  levelController: {fileID: 0}
   posX: 0
   posY: 0
+  levelSize: 7
+  myspace: {fileID: 0}
+  Cheated: 0
+  levelObject: {fileID: 0}
+  backTrackPrefab: {fileID: 7672425270050303154, guid: bc5a5774cbed7f04db304eb5e47f30f7,
+    type: 3}
+  wine: 0
+  grapes: 0
+  wineLoss: 0
+  grapeHealAmount: 0
+  wineHealAmount: 0
+  backtrackDamage: 0
+  hazardDamage: 0
+  walkDamage: 0
+  playerStartWine: 0
+  playerMaxWine: 0

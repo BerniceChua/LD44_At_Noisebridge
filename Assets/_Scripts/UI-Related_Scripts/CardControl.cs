@@ -31,7 +31,7 @@ public class CardControl : MonoBehaviour
         SyncButtons();
     }
 
-    void SyncButtons()
+    public void SyncButtons()
     {
         m_dest = new Vector2[m_button.Length];
         for (int i=0; i<m_button.Length; i++)
@@ -171,7 +171,7 @@ public class CardControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hudtext.GetComponent<Text>().text = "Grapes="+player.grapes+"  Wine="+player.wine+"  PlX="+player.posX+"  PlY="+player.posY;
+        hudtext.GetComponent<Text>().text = "Grapes="+player.grapes+"  Wine="+player.wine+"/"+player.playerMaxWine  + "  PlX="+player.posX+"  PlY="+player.posY;
         if (tweenUse)
         {
             tweenPos += Time.deltaTime;
