@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04fe969601e26234989efc95e3fc5a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelSpecification: {fileID: 11400000, guid: cb43dacff2da07a48a4c8dfe9dc0b498, type: 2}
+  LevelSpecification: {fileID: 11400000, guid: b91944db0c8bdf0429a0b53c44c686d9, type: 2}
 --- !u!114 &870659069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,7 +554,7 @@ RectTransform:
   m_Children:
   - {fileID: 785166758}
   m_Father: {fileID: 1849584348}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -608,8 +608,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -6.1, y: -23.14}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 75.2, y: -23.14}
+  m_SizeDelta: {x: 322.6, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1048366626
 MonoBehaviour:
@@ -751,7 +751,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1310794063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -844,7 +844,7 @@ RectTransform:
   m_Children:
   - {fileID: 1197305657}
   m_Father: {fileID: 1849584348}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -938,9 +938,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_button:
-  - {fileID: 1310794063}
-  - {fileID: 2102596004}
   - {fileID: 987674692}
+  - {fileID: 2102596004}
   levelObject: {fileID: 1371145808}
   player: {fileID: 1876819900}
   tweenUse: 0
@@ -1036,9 +1035,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1310794066}
   - {fileID: 2102596007}
   - {fileID: 987674695}
+  - {fileID: 1310794066}
   - {fileID: 1802930636}
   - {fileID: 1048366625}
   m_Father: {fileID: 0}
@@ -1160,9 +1159,18 @@ MonoBehaviour:
   levelSize: 7
   myspace: {fileID: 0}
   levelObject: {fileID: 1371145808}
+  backTrackPrefab: {fileID: 7672425270050303154, guid: bc5a5774cbed7f04db304eb5e47f30f7,
+    type: 3}
   wine: 0
   grapes: 0
   wineLoss: 0
+  grapeHealAmount: 0
+  wineHealAmount: 0
+  backtrackDamage: 0
+  hazardDamage: 0
+  walkDamage: 0
+  playerStartWine: 0
+  playerMaxWine: 0
 --- !u!1 &2091631133
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,7 +1362,7 @@ RectTransform:
   m_Children:
   - {fileID: 2091631134}
   m_Father: {fileID: 1849584348}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
