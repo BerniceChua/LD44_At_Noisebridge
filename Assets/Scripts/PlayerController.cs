@@ -22,6 +22,15 @@ public class PlayerController : MonoBehaviour
 
     public int wine, grapes, wineLoss;
 
+    Quaternion aresFrom;
+    Quaternion aresTo;
+    float aresTween = 0f;
+    Quaternion dionysusFrom;
+    Quaternion dionysusTo;
+    float dionysusTween = 0f;
+    float gobletRotation = 0f;
+    double grapeBounce = 0f;
+    
     private bool m_reachedExit = false;
     public bool ReachedExit {
         get { return m_reachedExit; }
@@ -44,6 +53,37 @@ public class PlayerController : MonoBehaviour
             Debug.Log("cheated");
             Cheated = true;
         }
+
+        if (aresFrom != null && aresTo != null)
+        {
+            aresTween += Time.deltaTime;
+            transform.localRotation = Quaternion.Slerp(aresFrom, aresTo, aresTween * 10);
+        }
+
+        gobletRotation = (gobletRotation + Time.deltaTime * 45) % 360f;
+        grapeBounce = Mathf.Sin(Time.time) * 0.5;
+
+        foreach (GameObject pickup in GameObject.FindGameObjectsWithTag("pickup"))
+        {
+            if (pickup.name.Contains("dionysus"))
+            {
+                if (dionysusFrom != null && dionysusTo != null)
+                {
+                    dionysusTween += Time.deltaTime;
+                    pickup.transform.localRotation = Quaternion.Slerp(dionysusFrom, dionysusTo, dionysusTween * 10);
+                }
+            }
+            else if (pickup.name.Contains("Wine"))
+            {
+                pickup.transform.localEulerAngles = new Vector3(0f, gobletRotation, 0f);
+                pickup.transform.localPosition = new Vector3(0f, 1.5f + ((float)grapeBounce) * 0.5f, 0f);
+            }
+            else if (pickup.name.Contains("Grape"))
+            {
+                pickup.transform.localPosition = new Vector3(0f,1.7f + (float)grapeBounce, 0f);
+            }
+        }
+
     }
 
     public Transform GetCurrentSpaceTransform()
@@ -98,8 +138,53 @@ public class PlayerController : MonoBehaviour
         Debug.Log(spaceobj);
         transform.SetParent(spaceobj);
         //Debug.Break();
+
+        // turn player towards direction of travel
+        if (posX < x)
+        {
+            Vector3 directionvec = new Vector3(1f,0f,0f);
+            aresFrom = transform.rotation;
+            aresTo = Quaternion.LookRotation(directionvec, transform.up);
+            aresTween = 0f;
+        }
+        if (posX > x)
+        {
+            Vector3 directionvec = new Vector3(-1f, 0f, 0f);
+            aresFrom = transform.rotation;
+            aresTo = Quaternion.LookRotation(directionvec, transform.up);
+            aresTween = 0f;
+        }
+        if (posY < y)
+        {
+            Vector3 directionvec = new Vector3(0f, 0f, 1f);
+            aresFrom = transform.rotation;
+            aresTo = Quaternion.LookRotation(directionvec, transform.up);
+            aresTween = 0f;
+        }
+        if (posY > y)
+        {
+            Vector3 directionvec = new Vector3(0f, 0f, -1f);
+            aresFrom = transform.rotation;
+            aresTo = Quaternion.LookRotation(directionvec, transform.up);
+            aresTween = 0f;
+        }
+
+        // turn dionysus towards player
+        foreach (GameObject pickup in GameObject.FindGameObjectsWithTag("pickup"))
+        {
+            if (pickup.name.Contains("dionysus"))
+            {
+                dionysusFrom = pickup.transform.rotation;
+                dionysusTween = 0f;
+                Vector3 direction = transform.position - pickup.transform.position;
+                direction.y = 0;
+                dionysusTo = Quaternion.LookRotation(direction, pickup.transform.up);
+            }
+        }
+
         posX = x;
         posY = y;
+
         // 12:00 - the x and y are the same
         // 12:10 - myspace points to a seemingly unrelated object
         // 12:18 - it is not because the number of children has changed because of subobjects
