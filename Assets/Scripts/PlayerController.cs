@@ -163,4 +163,8 @@ public class PlayerController : MonoBehaviour
         //this.m_ForwardSwimSpeed = 0.0f;
         this.transform.Translate(0.0f, 0.5f, 0.0f);
     }
+
+    public void ResetExitStatus() {
+        m_reachedExit = false;
+    }
 }
