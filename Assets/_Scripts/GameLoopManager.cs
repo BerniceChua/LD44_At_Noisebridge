@@ -33,10 +33,6 @@ public class GameLoopManager : MonoBehaviour {
     [Tooltip("For scene loading, put the name of the scene for the game level")]
     [SerializeField] private string m_gameLevelScene;
 
-    public AudioSource EndSoundSource;
-    public AudioSource Soundtrack;
-    public bool PlayingEndSound;
-
     public Transform StaticParent;
 
     [SerializeField] private generate_level m_levelGenerator;
@@ -56,7 +52,8 @@ public class GameLoopManager : MonoBehaviour {
         for (int sceneCount = 0; sceneCount < m_ArrayOfLevels.Length; sceneCount++) {
             //Debug.Log("sceneCount = " + sceneCount);
             //if (sceneCount > m_ArrayOfLevels.Length) {
-            //    m_menuPanel.SetActive(true);
+                /// Re-enable restart/main menu/quit options when game ends.
+                //m_menuPanel.SetActive(true);
             //} else {
                 // As soon as the round begins playing let the players control the characters.
                 EnablePlayerControl();
@@ -76,8 +73,7 @@ public class GameLoopManager : MonoBehaviour {
                 m_MessageText.text = string.Empty;
                 // As soon as the round begins playing, start the countdown timer.
                 while (m_playerController.ReachedExit == false && m_playerController.Cheated == false
-                    && m_playerController.wine > 0)
-                {
+                    && m_playerController.wine > 0) {
                     //UpdateTimer();
                     // ... return on the next frame.
                     yield return null;
@@ -98,10 +94,6 @@ public class GameLoopManager : MonoBehaviour {
                 yield return null;
                 //yield return StartCoroutine(RoundEnding());
 
-                /// Re-enable restart/main menu/quit options when game ends.
-                m_menuPanel.SetActive(true);
-                PlayingEndSound = false;
-
                 //EndSoundSource.Stop();
                 //Soundtrack.Play();
 
@@ -121,19 +113,16 @@ public class GameLoopManager : MonoBehaviour {
                     m_playerController = GameObject.Instantiate(playerPrefab).GetComponent<PlayerController>();
                     StaticParent = GameObject.Instantiate(levelObjectPrefab).transform;
                     DestroyCurrentLevel();
-                    //SceneManager.LoadScene(m_gameLevelScene);
-                
-               
                 } else if (Input.GetKey(KeyCode.Escape)) {
                     // Go to main menu.
                     SceneManager.LoadScene(m_introScene);
                 } else if (Input.GetKey(KeyCode.Q)) {
                     // Quit the game.
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
                     UnityEditor.EditorApplication.isPlaying = false;
-    #else
+#else
                     Application.Quit();
-    #endif
+#endif
                 }
             //}
         }
