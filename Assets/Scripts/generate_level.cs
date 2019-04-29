@@ -15,6 +15,14 @@ public class generate_level : MonoBehaviour
         int pStartX = 0, pStartY = 0;
         PlayerController pcon = GameObject.FindObjectOfType<PlayerController>();
 
+        pcon.grapeHealAmount = LevelSpecification.grapeHealAmount;
+        pcon.wineHealAmount = LevelSpecification.wineHealAmount;
+        pcon.backtrackDamage = LevelSpecification.backtrackDamage;
+        pcon.hazardDamage = LevelSpecification.hazardDamage;
+        pcon.walkDamage = LevelSpecification.walkDamage;
+        pcon.playerStartWine = LevelSpecification.playerStartWine;
+        pcon.playerMaxWine = LevelSpecification.playerMaxWine;
+        pcon.wine = pcon.playerStartWine;
         for (int i = 0; i < LevelSpecification.sizeX; i++)
         {
             for (int j = 0; j < LevelSpecification.sizeZ; j++)
@@ -60,6 +68,11 @@ public class generate_level : MonoBehaviour
                         pickup.transform.localScale = new Vector3(20f, 20f / pickup.transform.parent.localScale.y, 20f);
                     }
                     space.GetComponent<MoveSpace>().hasPickup = true;
+                }
+                if (pickuptype == 5)
+                {
+                    pStartX = space.GetComponent<MoveSpace>().posX;
+                    pStartY = space.GetComponent<MoveSpace>().posY;
                 }
             }
         }

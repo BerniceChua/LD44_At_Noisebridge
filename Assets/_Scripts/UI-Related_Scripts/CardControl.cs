@@ -67,7 +67,7 @@ public class CardControl : MonoBehaviour
         }
     }
 
-    bool Blocked(int x0, int y0, int x1, int y1)
+    public bool Blocked(int x0, int y0, int x1, int y1)
     {
         MoveSpace space0 = getGrid(x0, y0);
         MoveSpace space1 = getGrid(x1, y1);
@@ -88,13 +88,15 @@ public class CardControl : MonoBehaviour
         }
         if (diry > 0)
         {
+            //2019-04-28 3:08 PM - if I flip down/up it fixes one bug and surfaces a different one.
+
             // down
-            return (space0.moveSpaceType == SpaceType.WallBottom || space1.moveSpaceType == SpaceType.WallTop);
+            return (space0.moveSpaceType == SpaceType.WallTop || space1.moveSpaceType == SpaceType.WallBottom);
         }
         if (diry < 0)
         {
             // up
-            return (space0.moveSpaceType == SpaceType.WallTop || space1.moveSpaceType == SpaceType.WallBottom);
+            return (space0.moveSpaceType == SpaceType.WallBottom || space1.moveSpaceType == SpaceType.WallTop);
         }
         return false;
     }
@@ -107,19 +109,23 @@ public class CardControl : MonoBehaviour
         GameObject.FindObjectOfType<LevelViewController>().ClearSuggestedMoves();
 
         // highlight by type
-        if (at == AbilityType.Basic)
+        //if (at == AbilityType.Basic)
         {
             int[,] offsets = new int[,] { { -1, 0 }, { 0, -1 }, { 1, 0 }, { 0, 1 } };
             Debug.Log(player.posX + ","+player.posY);
             for (int i=0; i<4; i++)
             {
                 MoveSpace space = getGrid(offsets[i,0] + player.posX, offsets[i,1] + player.posY);
-                if (space != null)
+                int nx = player.posX;
+                int ny = player.posY;
+                if (space != null && !Blocked(nx, ny, nx + offsets[i, 0], ny + offsets[i, 1]))
+                {
                     space.hasSuggestedMove = true;
+                    space.wineLoss = 1;
+                }
             }
-            player.wineLoss = 1;
         }
-        else if (at == AbilityType.Dash)
+        if (at == AbilityType.Dash)
         {
             int[,] offsets = new int[,] { { -1, 0 }, { 0, -1 }, { 1, 0 }, { 0, 1 } };
             Debug.Log(player.posX + "," + player.posY);
@@ -135,9 +141,11 @@ public class CardControl : MonoBehaviour
                     ans = getGrid(nx, ny);
                 }
                 if (ans != null)
+                {
                     ans.hasSuggestedMove = true;
+                    ans.wineLoss = 2;
+                }
             }
-            player.wineLoss = 2;
         }
         else if (at == AbilityType.Diagonal)
         {
@@ -145,18 +153,23 @@ public class CardControl : MonoBehaviour
             Debug.Log(player.posX + "," + player.posY);
             for (int i = 0; i < 4; i++)
             {
-                MoveSpace space = getGrid(offsets[i, 0] + player.posX, offsets[i, 1] + player.posY);
-                if (space != null)
+                int nx0 = player.posX;
+                int ny0 = player.posY;
+                int nx1 = offsets[i, 0] + player.posX;
+                int ny1 = offsets[i, 1] + player.posY;
+                MoveSpace space = getGrid(nx1, ny1);
+                if (space != null && ((!Blocked(nx0,ny0,nx1,ny0) && !Blocked(nx1,ny0,nx1,ny1)) || (!Blocked(nx0,ny0,nx0,ny1) && !Blocked(nx0,ny1,nx1,ny1)))) { 
                     space.hasSuggestedMove = true;
+                    space.wineLoss = 1;
+                }
             }
-            player.wineLoss = 1;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        hudtext.GetComponent<Text>().text = "Grapes="+player.grapes+"  Wine="+player.wine;
+        hudtext.GetComponent<Text>().text = "Grapes="+player.grapes+"  Wine="+player.wine+"  PlX="+player.posX+"  PlY="+player.posY;
         if (tweenUse)
         {
             tweenPos += Time.deltaTime;

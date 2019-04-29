@@ -16,6 +16,14 @@ public class level_specification : ScriptableObject {
 
     public int sizeX, sizeZ;
 
+    public int grapeHealAmount;
+    public int wineHealAmount;
+    public int backtrackDamage;
+    public int hazardDamage;
+    public int walkDamage;
+    public int playerStartWine;
+    public int playerMaxWine;
+
     public SpaceType[] Spaces;
 
     public GameObject Prefab_AbilityInventory;

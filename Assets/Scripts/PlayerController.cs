@@ -15,12 +15,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Transform levelObject;
 
+    [SerializeField]
+    GameObject backTrackPrefab;
+
     public int wine, grapes, wineLoss;
 
     private bool m_reachedExit = false;
     public bool ReachedExit {
         get { return m_reachedExit; }
     }
+
+    //variable per-level properties
+    public int grapeHealAmount;
+    public int wineHealAmount;
+    public int backtrackDamage;
+    public int hazardDamage;
+    public int walkDamage;
+    public int playerStartWine;
+    public int playerMaxWine;
 
 
 
@@ -30,7 +42,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //move to a space, given it's map coords
-    public void MoveToSpace(int x, int y)
+    public void MoveToSpace(int x, int y, Transform ps = null)
     {
         Debug.Log("movetospace" + x+ "," + y);
         Transform spaceobj = levelObject.GetChild((levelSize * x) + y);
@@ -41,12 +53,14 @@ public class PlayerController : MonoBehaviour
         transform.SetParent(spaceobj);
         posX = x;
         posY = y;
-        wine -= wineLoss;
+        //wine -= wineLoss;
         // 12:00 - the x and y are the same
         // 12:10 - myspace points to a seemingly unrelated object
         // 12:18 - it is not because the number of children has changed because of subobjects
         if (spaceobj.GetComponent<MoveSpace>().hasPickup)
         {
+            spaceobj.GetComponent<MoveSpace>().hasPickup = false;
+
             GameObject pickupobj = null;
             foreach(Transform child in spaceobj)
             {
@@ -60,40 +74,80 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("has pickup!" + pickupobj.name);
 
-                if (pickupobj.name.Contains("Grape"))
-                {
-                    grapes += 3;
+                if (pickupobj.name.Contains("Grape")) {
+                    grapes += grapeHealAmount;
                     Destroy(pickupobj);
-                }
-                else if (pickupobj.name.Contains("Hazard"))
-                {
-                    wine -= 1;
-                }
-                else if (pickupobj.name.Contains("Press"))
-                {
+                    InstantiateBackTrackHazard(ps);
+                } else if (pickupobj.name.Contains("Hazard")) {
+                    spaceobj.GetComponent<MoveSpace>().hasPickup = true;
+
+                    wine -= hazardDamage;
+                } else if (pickupobj.name.Contains("Press")) {
+                    spaceobj.GetComponent<MoveSpace>().hasPickup = true;
+
                     wine += grapes;
+                    wine = Mathf.Clamp(wine, 0, playerMaxWine + 1);
                     grapes = 0;
                     // it's a berry simple formula
-                }
-                else if (pickupobj.name.Contains("BackTrack"))
-                {
-                    wine -= 1;
-                }
-                else if (pickupobj.name.Contains("Wine"))
-                {
-                    wine += 1;
+                } else if (pickupobj.name.Contains("fire")) {
+                    wine -= backtrackDamage;
+                } else if (pickupobj.name.Contains("Wine")) {
+                    wine += wineHealAmount;
+                    wine = Mathf.Clamp(wine, 0, playerMaxWine + 1);
+
+                    Destroy(pickupobj);
+                    InstantiateBackTrackHazard(ps);
                 } else if (pickupobj.name.Contains("dionysus")) {
                     /// This is the 'success' condition, to exit the game loop. ^_^
                     m_reachedExit = true;
                 }
             }
+
+        }
+        //if we were passed a previous player space
+        //check if we should add backtrack hazard
+        if (ps != null)
+        {
+            wine -= ps.GetComponent<MoveSpace>().wineLoss;
+            //if no pickup, create backtrack hazard
+            if (!ps.GetComponent<MoveSpace>().hasPickup)
+            {
+                InstantiateBackTrackHazard(ps);
+            }
+            //otherwise, check the pickup type, and selectively place one based on that type
+            else
+            {
+                GameObject pickupobj = null;
+                foreach (Transform child in ps)
+                {
+                    if (child.tag == "pickup")
+                    {
+                        pickupobj = child.gameObject;
+                        break;
+                    }
+                }
+                if (pickupobj != null)
+                {
+                    if (pickupobj.name.Contains("Grape") || pickupobj.name.Contains("Wine"))
+                        InstantiateBackTrackHazard(ps);
+            }
+        }
         }
     }
 
-    //move to a space, given it's transform component
-    public void MoveToSpace(Transform t)
+    public void InstantiateBackTrackHazard(Transform playerSpace)
     {
-        MoveToSpace(t.GetComponent<MoveSpace>().posX, t.GetComponent<MoveSpace>().posY);
+        GameObject pickup = (GameObject)Instantiate(backTrackPrefab, playerSpace);
+        pickup.transform.localPosition = new Vector3(0f, 4.5f, 0f);
+        pickup.transform.localScale = new Vector3(1f, 1f / pickup.transform.parent.localScale.y, 1f);
+        playerSpace.GetComponent<MoveSpace>().hasPickup = true;
+    }
+
+    //move to a space, given it's transform component
+    //ps is previous space we are moving from
+    public void MoveToSpace(Transform t, Transform ps)
+    {
+        MoveToSpace(t.GetComponent<MoveSpace>().posX, t.GetComponent<MoveSpace>().posY, ps);
     }
 
     // Used during the phases of the game where the player should be able to control their characters.

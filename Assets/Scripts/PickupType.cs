@@ -10,5 +10,6 @@ public enum PickupType
     Press,
     BackTrack,
     Start,  //5
-    Exit    //6
+    Exit,    //6
+    Wine
 }
