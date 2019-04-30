@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
 
     Quaternion aresFrom;
     Quaternion aresTo;
+    Vector3 aresFromT;
+    Vector3 aresToT;
     float aresTween = 0f;
     Quaternion dionysusFrom;
     Quaternion dionysusTo;
@@ -58,6 +60,7 @@ public class PlayerController : MonoBehaviour
         {
             aresTween += Time.deltaTime;
             transform.localRotation = Quaternion.Slerp(aresFrom, aresTo, aresTween * 10);
+            transform.position = Vector3.Lerp(aresFromT, aresToT, aresTween * 10);
         }
 
         gobletRotation = (gobletRotation + Time.deltaTime * 45) % 360f;
@@ -133,40 +136,40 @@ public class PlayerController : MonoBehaviour
         myspace = spaceobj;
         Debug.Log(myspace);
         Debug.Log(spaceobj.GetComponent<MoveSpace>().hasPickup);
-        transform.position = new Vector3(spaceobj.position.x, .8f, spaceobj.position.z);
+        //transform.position = new Vector3(spaceobj.position.x, .8f, spaceobj.position.z);
+        aresFromT = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        aresToT = new Vector3(spaceobj.position.x, .8f, spaceobj.position.z);
         //Debug.Break();
         Debug.Log(spaceobj);
         transform.SetParent(spaceobj);
         //Debug.Break();
 
         // turn player towards direction of travel
+        aresTo = aresFrom; // default
+        aresTween = 0f;
         if (posX < x)
         {
             Vector3 directionvec = new Vector3(1f,0f,0f);
             aresFrom = transform.rotation;
             aresTo = Quaternion.LookRotation(directionvec, transform.up);
-            aresTween = 0f;
         }
         if (posX > x)
         {
             Vector3 directionvec = new Vector3(-1f, 0f, 0f);
             aresFrom = transform.rotation;
             aresTo = Quaternion.LookRotation(directionvec, transform.up);
-            aresTween = 0f;
         }
         if (posY < y)
         {
             Vector3 directionvec = new Vector3(0f, 0f, 1f);
             aresFrom = transform.rotation;
             aresTo = Quaternion.LookRotation(directionvec, transform.up);
-            aresTween = 0f;
         }
         if (posY > y)
         {
             Vector3 directionvec = new Vector3(0f, 0f, -1f);
             aresFrom = transform.rotation;
             aresTo = Quaternion.LookRotation(directionvec, transform.up);
-            aresTween = 0f;
         }
 
         // turn dionysus towards player
