@@ -1382,6 +1382,7 @@ MonoBehaviour:
   m_StartDelay: 3
   m_EndDelay: 3
   m_endMessagePanel: {fileID: 1732350265}
+  m_ResultsMessageText: {fileID: 0}
   m_MessageText: {fileID: 818277397}
   playerPrefab: {fileID: 3999213417968678313, guid: 8e0a0f226d7b4254f8c7018cc7bd7152,
     type: 3}
@@ -1395,7 +1396,7 @@ MonoBehaviour:
   StaticParent: {fileID: 1371145808}
   m_levelGenerator: {fileID: 870659068}
   m_ArrayOfLevels:
-  - {fileID: 11400000, guid: e6872a1754ec788469cb86dc585534b2, type: 2}
+  - {fileID: 11400000, guid: ff98ffedc8ea66f4e9bc32b6ec484f35, type: 2}
 --- !u!1 &873399224
 GameObject:
   m_ObjectHideFlags: 0
