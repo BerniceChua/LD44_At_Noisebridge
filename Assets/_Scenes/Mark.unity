@@ -1419,7 +1419,7 @@ MonoBehaviour:
   m_levelGenerator: {fileID: 870659068}
   m_ArrayOfLevels:
   - {fileID: 11400000, guid: 9dd94754e81e21042baf6bc8efd3284b, type: 2}
-  - {fileID: 11400000, guid: 9dd94754e81e21042baf6bc8efd3284b, type: 2}
+  - {fileID: 11400000, guid: e2a4ce9971152924091be1fe90341bdc, type: 2}
 --- !u!1 &873399224
 GameObject:
   m_ObjectHideFlags: 0
@@ -1788,6 +1788,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChaliceSlider
       objectReference: {fileID: 0}
+    - target: {fileID: 3245506748483409781, guid: 1bfacd60bbc081d4d89d84e66460f71d,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3245506748483409781, guid: 1bfacd60bbc081d4d89d84e66460f71d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3245506749169013531, guid: 1bfacd60bbc081d4d89d84e66460f71d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1891,16 +1901,6 @@ PrefabInstance:
     - target: {fileID: 3245506749169013531, guid: 1bfacd60bbc081d4d89d84e66460f71d,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3245506748483409781, guid: 1bfacd60bbc081d4d89d84e66460f71d,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3245506748483409781, guid: 1bfacd60bbc081d4d89d84e66460f71d,
-        type: 3}
-      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2822,7 +2822,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1586059641}
   m_LocalRotation: {x: 0.2090646, y: -0.25268397, z: 0.056018684, w: 0.9430295}
-  m_LocalPosition: {x: 489.64545, y: 496.39343, z: -7.0082297}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

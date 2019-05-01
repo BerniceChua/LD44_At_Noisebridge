@@ -37,8 +37,10 @@ MonoBehaviour:
   - {fileID: 7262328712460950293, guid: 6fee5cc2dec3f8d44b55389b233841de, type: 3}
   - {fileID: 212152356359828950, guid: 362e061477139a640972815dbf5c546f, type: 3}
   Prefab_ExitSpace: {fileID: 0}
-  sizeX: 7
-  sizeZ: 7
+  LevelLayoutPrefab: {fileID: 6960943827725949467, guid: 37d7d3bfaa8cfd6488adfba8b96c9d59,
+    type: 3}
+  sizeX: 4
+  sizeZ: 4
   grapeHealAmount: 3
   wineHealAmount: 3
   backtrackDamage: 1
