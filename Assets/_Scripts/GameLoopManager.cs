@@ -11,6 +11,7 @@ public class GameLoopManager : MonoBehaviour {
     [SerializeField] public float m_EndDelay = 3f;
 
     [SerializeField] private GameObject m_endMessagePanel;     // Reference to the overlay Panel that contains Text to display result text, etc.
+    public Text m_ResultsMessageText;                  // Reference to the overlay Text to display result text, etc.
     public TextMeshProUGUI m_MessageText;                  // Reference to the overlay Text to display result text, etc.
 
     public GameObject playerPrefab, levelObjectPrefab;
@@ -52,6 +53,9 @@ public class GameLoopManager : MonoBehaviour {
     public IEnumerator GameLoop() {
 
         for (int sceneCount = 0; sceneCount < m_ArrayOfLevels.Length; sceneCount++) {
+            // Clear the text from the screen.
+            m_ResultsMessageText.text = string.Empty;
+
             //Debug.Log("sceneCount = " + sceneCount);
             // As soon as the round begins playing let the players control the characters.
             EnablePlayerControl();
@@ -93,7 +97,7 @@ public class GameLoopManager : MonoBehaviour {
             DisablePlayerControl();
             /// Get a message based on the scores and whether or not all the characters survived and display it.
             message = EndMessage();
-            m_MessageText.text = message;
+            m_ResultsMessageText.text = message;
             // Wait for the specified length of time until yielding control back to the game loop.
 
             yield return null;
@@ -252,6 +256,7 @@ public class GameLoopManager : MonoBehaviour {
     /// UI Button to restart the level.
     /// </summary>
     public void UIButtonRestartGame() {
+        m_menuPanel.SetActive(false);
         SceneManager.LoadScene(m_gameLevelScene);
     }
 
