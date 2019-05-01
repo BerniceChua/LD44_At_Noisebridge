@@ -15,6 +15,8 @@ public class level_specification : ScriptableObject {
     
     public GameObject Prefab_ExitSpace;
 
+    public GameObject LevelLayoutPrefab;
+
     public int sizeX, sizeZ;
 
     public int grapeHealAmount;

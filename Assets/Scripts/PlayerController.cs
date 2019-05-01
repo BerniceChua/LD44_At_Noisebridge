@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("movetospace" + x+ "," + y);
         Transform spaceobj = levelObject.GetChild((levelSize * x) + y);
-        Debug.Log(levelSize * x + y);
+        Debug.Log("child index:" + levelSize * x + y);
         myspace = spaceobj;
         Debug.Log(myspace);
         Debug.Log(spaceobj.GetComponent<MoveSpace>().hasPickup);

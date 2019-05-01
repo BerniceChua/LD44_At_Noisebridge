@@ -15,7 +15,7 @@ public class CardControl : MonoBehaviour
     [SerializeField]
     public PlayerController player;
 
-    int levelSize = 7;
+    public int levelSize;
 
     public int dashLoss, diagLoss;
 
@@ -54,6 +54,7 @@ public class CardControl : MonoBehaviour
 
     MoveSpace getGrid(int x, int y)
     {
+        Debug.Log("GetGrid x:" + x + " y:" + y);
         if (x < 0 || x >= levelSize || y < 0 || y >= levelSize)
             return null;
         int idx = levelSize * x + y;
@@ -75,17 +76,20 @@ public class CardControl : MonoBehaviour
         MoveSpace space1 = getGrid(x1, y1);
         int dirx = x1 - x0;
         int diry = y1 - y0;
+        Debug.Log("here0" + space0);
+        Debug.Log("here1" + space1);
 
         if (space0 == null || space1 == null) return true;
-
         if (dirx > 0)
         {
             // right
+            Debug.Log("right");
             return (space0.moveSpaceType == SpaceType.WallRight || space1.moveSpaceType == SpaceType.WallLeft || space1.moveSpaceType == SpaceType.WallTopLeft);
         }
         if (dirx < 0)
         {
             // left
+            Debug.Log("left");
             return (space0.moveSpaceType == SpaceType.WallLeft || space1.moveSpaceType == SpaceType.WallRight || space0.moveSpaceType == SpaceType.WallTopLeft);
         }
         if (diry > 0)
@@ -93,11 +97,13 @@ public class CardControl : MonoBehaviour
             //2019-04-28 3:08 PM - if I flip down/up it fixes one bug and surfaces a different one.
 
             // down
+            Debug.Log("down");
             return (space0.moveSpaceType == SpaceType.WallTop || space1.moveSpaceType == SpaceType.WallBottom || space0.moveSpaceType == SpaceType.WallTopLeft);
         }
         if (diry < 0)
         {
             // up
+            Debug.Log("up");
             return (space0.moveSpaceType == SpaceType.WallBottom || space1.moveSpaceType == SpaceType.WallTop || space1.moveSpaceType == SpaceType.WallTopLeft);
         }
         return false;

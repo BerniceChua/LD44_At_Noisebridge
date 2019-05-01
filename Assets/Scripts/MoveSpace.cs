@@ -56,6 +56,8 @@ public class MoveSpace : MonoBehaviour
                 int fromY = GameObject.FindObjectOfType<PlayerController>().posY;
                 int xdist = Mathf.Abs(fromX - posX);
                 int ydist = Mathf.Abs(fromY - posY);
+                Debug.Log("test1:" + ((xdist <= 1) && (ydist <= 1) && (xdist + ydist == 1)));
+                Debug.Log("testnotblocked:" + !GameObject.FindObjectOfType<CardControl>().Blocked(fromX, fromY, posX, posY));
                 if ((xdist <= 1) && (ydist <= 1) && (xdist + ydist == 1) && !GameObject.FindObjectOfType<CardControl>().Blocked(fromX, fromY, posX, posY))
                 {
                     isCardinal = true;
@@ -70,6 +72,7 @@ public class MoveSpace : MonoBehaviour
                    
                     Debug.Log("yo " + posX + " "+ posY);
                     //then move
+                    Debug.Log("moving to me:" + posX + "," + posY);
                     GameObject.FindObjectOfType<PlayerController>().MoveToSpace(transform, playerSpace);
                     GameObject.FindObjectOfType<LevelViewController>().ClearSuggestedMoves();
                 }
