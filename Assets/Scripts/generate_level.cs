@@ -148,6 +148,8 @@ public class generate_level : MonoBehaviour
         //pcon.levelObject = GameObject.Find("LevelObject").transform;
         pcon.MoveToSpace(pStartX, pStartY);
         pcon.ResetExitStatus();
+        pcon.spacesArray = spacesArray;
+        pcon.pickupsArray = pickupsArray;
     }
     
     GameObject[,] CreateSpacesArray(Transform levelTF, int sizeX, int sizeZ)

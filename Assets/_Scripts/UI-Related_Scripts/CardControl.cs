@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+/* triplefox, 2019-05-02 1:03 AM
+ *
+ * I'd like to move the detection of the move locations into an update routine in GameLoopManager or LevelViewController.
+ * I did something hacky to make it show all the locations, but really, it could be radically simplified.
+ * 
+ */
+
 public class CardControl : MonoBehaviour
 {
 
@@ -34,13 +41,18 @@ public class CardControl : MonoBehaviour
     public void SyncButtons()
     {
         m_dest = new Vector2[m_button.Length];
-        for (int i=0; i<m_button.Length; i++)
+        GameObject.FindObjectOfType<LevelViewController>().ClearSuggestedMoves();
+        for (int i = 0; i < m_button.Length; i++)
         {
-            m_button[i].onClick.RemoveAllListeners();
-            m_button[i].onClick.AddListener(TaskOnClick);
-            AbilityType abilityType = m_button[i].GetComponent<Ability>().type;
-            m_button[i].onClick.AddListener(delegate { HighlightClickables(abilityType); });
-            m_dest[i] = new Vector2(m_button[i].transform.position.x, m_button[i].transform.position.y);
+            if (m_button[i] != null)
+            {
+                m_button[i].onClick.RemoveAllListeners();
+                m_button[i].onClick.AddListener(TaskOnClick);
+                AbilityType abilityType = m_button[i].GetComponent<Ability>().type;
+                HighlightClickables(abilityType);
+                m_button[i].onClick.AddListener(delegate { HighlightClickables(abilityType); });
+                m_dest[i] = new Vector2(m_button[i].transform.position.x, m_button[i].transform.position.y);
+            }
         }
     }
 
@@ -114,7 +126,7 @@ public class CardControl : MonoBehaviour
         Debug.Log(at);
 
         // clear suggested moves
-        GameObject.FindObjectOfType<LevelViewController>().ClearSuggestedMoves();
+        //GameObject.FindObjectOfType<LevelViewController>().ClearSuggestedMoves();
 
         // highlight by type
         //if (at == AbilityType.Basic)
@@ -195,6 +207,7 @@ public class CardControl : MonoBehaviour
                 m_button[i].transform.position = pos;
             }
         }
+        SyncButtons();
     }
 }
 

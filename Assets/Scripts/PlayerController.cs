@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// triplefox 2019-05-03 6:15 PM - with the generated level data on the player controller, we have a primary source of truth
+
 public class PlayerController : MonoBehaviour
 {
 
@@ -9,6 +11,8 @@ public class PlayerController : MonoBehaviour
     Camera camera;
 
     public int posX, posY, levelSize;
+    public GameObject[,] spacesArray;
+    public GameObject[,] pickupsArray;
 
     public Transform myspace;
 
