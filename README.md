@@ -1,5 +1,5 @@
 # Ares, Fairies, and Berries (LD44 At Noisebridge)
-Our game for [Ludum Dare 44 (LD44)](https://ldjam.com/) at [Noisebridge](https://www.noisebridge.net) ([April 26 - 28, 2019](https://ldjam.com/events/ludum-dare/44)).  The theme of LD44 is "[Your life is currency](https://ldjam.com/events/ludum-dare/44/theme)".
+Our game for [Ludum Dare 44 (LD44)](https://ldjam.com/) at [Noisebridge](https://www.noisebridge.net) ([April 26 - 28, 2019](https://www.meetup.com/noisebridge/events/260441585/)).  The theme of [LD44](https://ldjam.com/events/ludum-dare/44) is "[Your life is currency](https://ldjam.com/events/ludum-dare/44/theme)".
 
 ## About
 Ares, the god of war, has hatched a plan to create chaos and war: Bring as much wine as possible to Dionysus, the god of wine, so that he will make the world drunk. However, Ares spills wine from his goblet with each step he takes, and leaves a path of flame behind him, making it dangerous to backtrack. Can you find a way through the labyrinth to make Dionysus merry?
